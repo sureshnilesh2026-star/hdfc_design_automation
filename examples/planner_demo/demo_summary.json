@@ -1,0 +1,326 @@
+{
+  "A": {
+    "scenario": "address_change_nominal",
+    "utterance": "I want to change my address.",
+    "1_accepted_input": {
+      "raw_text": "I want to change my address.",
+      "channel_hint": "asknow",
+      "locale": "en-IN",
+      "customer_context": {
+        "auth_state": "unknown",
+        "segment_hint": "ETB"
+      }
+    },
+    "2_accepted_intent": {
+      "user_intent": "UPDATE_ADDRESS",
+      "journey_type": "servicing",
+      "platform": "asknow",
+      "product_domain": "customer_profile",
+      "entities": [
+        {
+          "type": "customer_id",
+          "value": "CUST-88991",
+          "raw_span": null,
+          "confidence": 0.91
+        },
+        {
+          "type": "address_type",
+          "value": "residential",
+          "raw_span": "address",
+          "confidence": 0.8
+        }
+      ],
+      "confidence": 0.9,
+      "accepted_by": "intent_gate"
+    },
+    "3_knowledge_pack": {
+      "pack_id": "UPDATE_ADDRESS|asknow|v1",
+      "documents": "{'ENT-PROFILE-001', 'PLT-ASK-001', 'JOURNEY-ADDR-UPDATE-STUB'}",
+      "excerpt_count": 3,
+      "missing_knowledge": [
+        {
+          "asset_id": "TECH-ADDR-UPDATE-APIS",
+          "level": 5,
+          "reason": "required_but_absent",
+          "blocking": true
+        }
+      ],
+      "retrieval_policy": "journey > product > platform > enterprise"
+    },
+    "4_journey_skeleton": {
+      "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "steps": [
+        {
+          "id": "auth_gate",
+          "name": "Authenticate customer",
+          "ordinal": 0,
+          "optional": false,
+          "type": "auth_gate"
+        },
+        {
+          "id": "confirm_customer",
+          "name": "Confirm customer context",
+          "ordinal": 1,
+          "optional": false,
+          "type": "interaction"
+        },
+        {
+          "id": "capture_new_address",
+          "name": "Capture new address",
+          "ordinal": 2,
+          "optional": false,
+          "type": "interaction"
+        },
+        {
+          "id": "optional_comm_pref",
+          "name": "Update communication preferences",
+          "ordinal": 3,
+          "optional": true,
+          "type": "interaction"
+        },
+        {
+          "id": "review_and_submit",
+          "name": "Review and submit address change",
+          "ordinal": 4,
+          "optional": false,
+          "type": "terminal"
+        }
+      ]
+    },
+    "5_planner_input": {
+      "schema_version": "1.0.0",
+      "intent": "UPDATE_ADDRESS",
+      "pack_id": "UPDATE_ADDRESS|asknow|v1",
+      "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "repair_pass": 0,
+      "replan_context": null
+    },
+    "6_llm_execution": {
+      "provider_stand_in": "deterministic-planner-v1",
+      "llm_calls": 1,
+      "prompt_version": "planner-system-v1",
+      "self_retry": false
+    },
+    "7_planner_output": {
+      "artifact_type": "journey_plan",
+      "planner_status": "planned_with_unknowns",
+      "planner_ok": true,
+      "ordered_step_ids": [
+        "auth_gate",
+        "confirm_customer",
+        "capture_new_address",
+        "review_and_submit"
+      ],
+      "skipped_optional_step_ids": [
+        "optional_comm_pref"
+      ],
+      "decision_kinds": [
+        "order_steps",
+        "use_skeleton_step",
+        "require_auth",
+        "use_skeleton_step",
+        "use_skeleton_step",
+        "use_skeleton_step",
+        "skip_optional",
+        "bind_entity",
+        "bind_entity",
+        "require_information",
+        "require_information",
+        "require_information",
+        "require_information",
+        "require_information",
+        "require_information",
+        "require_information",
+        "require_information",
+        "mark_unknown_requirement",
+        "flag_assumption"
+      ],
+      "entity_bindings": [
+        "customer_id:CUST-88991->confirm_customer",
+        "address_type:residential->capture_new_address"
+      ],
+      "required_information_ids": [
+        "customer_id",
+        "address_line_1",
+        "address_line_2",
+        "city",
+        "state",
+        "postal_code",
+        "address_type",
+        "confirmation_ack"
+      ],
+      "assumptions": [
+        {
+          "id": "A_TECH-ADDR-UPDATE-APIS",
+          "risk": "high",
+          "must_confirm": true,
+          "statement": "Proceeding without TECH-ADDR-UPDATE-APIS; downstream must confirm before treating related enterprise details as known."
+        }
+      ],
+      "unknown_requirements": [
+        {
+          "id": "U_TECH-ADDR-UPDATE-APIS",
+          "kind": "api",
+          "blocking_hint": true,
+          "description": "Required knowledge asset TECH-ADDR-UPDATE-APIS is unavailable (required_but_absent); cannot assert enterprise fact."
+        }
+      ],
+      "knowledge_references": [
+        "ENT-PROFILE-001",
+        "JOURNEY-ADDR-UPDATE-STUB",
+        "PLT-ASK-001"
+      ]
+    },
+    "8_validation": {
+      "official_journey_validation": false,
+      "overall_passed": true,
+      "layers": [
+        {
+          "layer": "schema",
+          "passed": true,
+          "violation_codes": []
+        },
+        {
+          "layer": "referential_integrity",
+          "passed": true,
+          "violation_codes": []
+        },
+        {
+          "layer": "knowledge_reference",
+          "passed": true,
+          "violation_codes": []
+        },
+        {
+          "layer": "business_rule",
+          "passed": true,
+          "violation_codes": []
+        }
+      ],
+      "error_summary": null
+    },
+    "9_router_decision": {
+      "action": "escalate",
+      "failure_class": "blocking_knowledge_gap",
+      "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+      "repair_pass": 0,
+      "max_repairs": 1,
+      "validation_passed": true,
+      "blocking_knowledge_gaps": [
+        "U_TECH-ADDR-UPDATE-APIS"
+      ],
+      "high_risk_assumption_ids": [
+        "A_TECH-ADDR-UPDATE-APIS"
+      ],
+      "structural_codes": [],
+      "repairable_codes": [],
+      "allow_continue": false
+    },
+    "10_state_update": {
+      "status": "escalated",
+      "hitl_required": true,
+      "hitl_reasons": [
+        "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+        "failure_class=blocking_knowledge_gap",
+        "blocking_knowledge_gaps=U_TECH-ADDR-UPDATE-APIS",
+        "high_risk_assumptions=A_TECH-ADDR-UPDATE-APIS"
+      ],
+      "output_kind": "escalation",
+      "planning_ordered_steps": [
+        "auth_gate",
+        "confirm_customer",
+        "capture_new_address",
+        "review_and_submit"
+      ],
+      "planning_planner_status": "planned_with_unknowns",
+      "intent_untouched": true,
+      "knowledge_untouched": true,
+      "blueprint_validation_untouched": "pending",
+      "blueprint_final": null,
+      "repair_attempted": false
+    },
+    "11_execution_trace": [
+      {
+        "component": "orchestrator.router",
+        "actor": "code",
+        "decision": "route_eval_escalate"
+      },
+      {
+        "component": "journey_planner_agent",
+        "actor": "llm",
+        "decision": "planning_output_merged_pending_router"
+      },
+      {
+        "component": "orchestrator.planning_merge",
+        "actor": "code",
+        "decision": "merged_planner_output_into_business_planning"
+      },
+      {
+        "component": "orchestrator.router",
+        "actor": "code",
+        "decision": "router_escalate"
+      }
+    ],
+    "12_final_planning_result": {
+      "workflow_status": "escalated",
+      "allow_continue": false,
+      "failure_class": "blocking_knowledge_gap",
+      "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+      "next_gate": "HITL / knowledge backfill \u2014 Blueprint generation must NOT start"
+    }
+  },
+  "B": {
+    "scenario": "insufficient_knowledge_empty_pack",
+    "setup": "Empty KnowledgePack (no docs/excerpts). Same utterance + skeleton.",
+    "llm_stand_in_result": {
+      "planner_ok": false,
+      "planner_status": "failed",
+      "ordered_step_ids": [],
+      "error": {
+        "code": "uncitable_step",
+        "message": "KnowledgePack has no citable documents",
+        "retriable": false
+      },
+      "unknowns": [],
+      "assumptions": [],
+      "knowledge_references": [],
+      "llm_calls": 1
+    },
+    "validation": {
+      "overall_passed": true,
+      "official_journey_validation": false
+    },
+    "router": {
+      "action": "escalate",
+      "failure_class": "planner_failed",
+      "reason": "Planner failed (uncitable_step); escalate",
+      "repair_pass": 0,
+      "max_repairs": 1,
+      "validation_passed": true,
+      "blocking_knowledge_gaps": [],
+      "high_risk_assumption_ids": [],
+      "structural_codes": [],
+      "repairable_codes": [],
+      "allow_continue": false
+    },
+    "state": {
+      "status": "escalated",
+      "hitl_required": true,
+      "hitl_reasons": [
+        "Planner failed (uncitable_step); escalate",
+        "failure_class=planner_failed"
+      ],
+      "output_kind": "escalation",
+      "repair_attempted": false
+    },
+    "hallucination_counterfactual": {
+      "description": "If the LLM invented FAKE-ELIGIBILITY-DOC / TECH-ADDR-UPDATE-APIS as confirmed knowledge against an empty pack",
+      "validation_passed": false,
+      "violation_codes": [
+        "invented_knowledge_ref"
+      ],
+      "router_action": "escalate",
+      "router_failure_class": "structural",
+      "allow_continue": false
+    }
+  }
+}

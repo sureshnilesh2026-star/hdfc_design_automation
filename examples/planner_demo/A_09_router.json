@@ -1,0 +1,17 @@
+{
+  "action": "escalate",
+  "failure_class": "blocking_knowledge_gap",
+  "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+  "repair_pass": 0,
+  "max_repairs": 1,
+  "validation_passed": true,
+  "blocking_knowledge_gaps": [
+    "U_TECH-ADDR-UPDATE-APIS"
+  ],
+  "high_risk_assumption_ids": [
+    "A_TECH-ADDR-UPDATE-APIS"
+  ],
+  "structural_codes": [],
+  "repairable_codes": [],
+  "allow_continue": false
+}

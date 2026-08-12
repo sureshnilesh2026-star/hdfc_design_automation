@@ -1,0 +1,9 @@
+{
+  "raw_text": "I want to change my address.",
+  "channel_hint": "asknow",
+  "locale": "en-IN",
+  "customer_context": {
+    "auth_state": "unknown",
+    "segment_hint": "ETB"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "pack_id": "UPDATE_ADDRESS|asknow|v1",
+  "registry_version": "test-registry-address-1",
+  "query_id": null,
+  "references": [
+    {
+      "asset_id": "ENT-PROFILE-001",
+      "level": 1,
+      "path": null,
+      "sections": [
+        "Customer profile servicing"
+      ],
+      "chunk_ids": [],
+      "relevance": null,
+      "freshness": "current",
+      "status": "loaded",
+      "authority_rank": null
+    },
+    {
+      "asset_id": "PLT-ASK-001",
+      "level": 3,
+      "path": null,
+      "sections": [
+        "Authentication",
+        "Journey Layer"
+      ],
+      "chunk_ids": [],
+      "relevance": null,
+      "freshness": "current",
+      "status": "loaded",
+      "authority_rank": null
+    },
+    {
+      "asset_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "level": 4,
+      "path": null,
+      "sections": [
+        "Steps",
+        "Required information"
+      ],
+      "chunk_ids": [],
+      "relevance": null,
+      "freshness": "current",
+      "status": "stub",
+      "authority_rank": null
+    }
+  ],
+  "excerpts": [
+    {
+      "chunk_id": "PLT-ASK-001#auth",
+      "document_id": "PLT-ASK-001",
+      "section_path": [
+        "Authentication"
+      ],
+      "text": "Protected servicing activities on AskNow require authentication before profile changes are accepted.",
+      "relevance": 0.94
+    },
+    {
+      "chunk_id": "JOURNEY-ADDR-UPDATE-STUB#steps",
+      "document_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "section_path": [
+        "Steps"
+      ],
+      "text": "Address change journey skeleton: authenticate, confirm customer, capture new address, review, submit. Optional communication preference step may be skipped.",
+      "relevance": 0.99
+    },
+    {
+      "chunk_id": "ENT-PROFILE-001#addr",
+      "document_id": "ENT-PROFILE-001",
+      "section_path": [
+        "Customer profile servicing"
+      ],
+      "text": "Customers may request updates to communication or residential address through approved digital servicing journeys.",
+      "relevance": 0.9
+    }
+  ],
+  "missing_knowledge": [
+    {
+      "asset_id": "TECH-ADDR-UPDATE-APIS",
+      "level": 5,
+      "reason": "required_but_absent",
+      "blocking": true
+    }
+  ],
+  "conflicts": [],
+  "attribution_index": {
+    "by_document": [
+      "ENT-PROFILE-001",
+      "JOURNEY-ADDR-UPDATE-STUB",
+      "PLT-ASK-001"
+    ],
+    "by_chunk": [
+      "ENT-PROFILE-001#addr",
+      "JOURNEY-ADDR-UPDATE-STUB#steps",
+      "PLT-ASK-001#auth"
+    ]
+  },
+  "retrieval_policy": "journey > product > platform > enterprise",
+  "assembled_at": null
+}

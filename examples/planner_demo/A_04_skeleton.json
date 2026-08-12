@@ -1,0 +1,86 @@
+{
+  "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+  "journey_id": "JN-ADDR-UPDATE",
+  "intent": "UPDATE_ADDRESS",
+  "platform": "asknow",
+  "journey_type": "servicing",
+  "product_domain": "customer_profile",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "id": "auth_gate",
+      "type": "auth_gate",
+      "name": "Authenticate customer",
+      "ordinal": 0,
+      "optional": false,
+      "description": "Verify customer before profile mutation",
+      "required_entity_types": [],
+      "suggested_field_ids": [],
+      "allowed_knowledge_source_ids": [
+        "PLT-ASK-001",
+        "JOURNEY-ADDR-UPDATE-STUB"
+      ]
+    },
+    {
+      "id": "confirm_customer",
+      "type": "interaction",
+      "name": "Confirm customer context",
+      "ordinal": 1,
+      "optional": false,
+      "description": null,
+      "required_entity_types": [
+        "customer_id"
+      ],
+      "suggested_field_ids": [
+        "customer_id"
+      ],
+      "allowed_knowledge_source_ids": []
+    },
+    {
+      "id": "capture_new_address",
+      "type": "interaction",
+      "name": "Capture new address",
+      "ordinal": 2,
+      "optional": false,
+      "description": null,
+      "required_entity_types": [
+        "address_type"
+      ],
+      "suggested_field_ids": [
+        "address_line_1",
+        "address_line_2",
+        "city",
+        "state",
+        "postal_code",
+        "address_type"
+      ],
+      "allowed_knowledge_source_ids": []
+    },
+    {
+      "id": "optional_comm_pref",
+      "type": "interaction",
+      "name": "Update communication preferences",
+      "ordinal": 3,
+      "optional": true,
+      "description": null,
+      "required_entity_types": [],
+      "suggested_field_ids": [
+        "preferred_channel"
+      ],
+      "allowed_knowledge_source_ids": []
+    },
+    {
+      "id": "review_and_submit",
+      "type": "terminal",
+      "name": "Review and submit address change",
+      "ordinal": 4,
+      "optional": false,
+      "description": null,
+      "required_entity_types": [],
+      "suggested_field_ids": [
+        "confirmation_ack"
+      ],
+      "allowed_knowledge_source_ids": []
+    }
+  ]
+}

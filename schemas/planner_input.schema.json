@@ -1,0 +1,844 @@
+{
+  "$defs": {
+    "AcceptedEntity": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "minLength": 1,
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "raw_span": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Span"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ],
+      "title": "AcceptedEntity",
+      "type": "object"
+    },
+    "AcceptedIntent": {
+      "additionalProperties": false,
+      "description": "Immutable snapshot of intent.accepted for this Planner invocation.",
+      "properties": {
+        "user_intent": {
+          "minLength": 1,
+          "title": "User Intent",
+          "type": "string"
+        },
+        "journey_type": {
+          "$ref": "#/$defs/JourneyType"
+        },
+        "platform": {
+          "$ref": "#/$defs/Platform"
+        },
+        "product_domain": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Product Domain"
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/$defs/AcceptedEntity"
+          },
+          "title": "Entities",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "ambiguities": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Ambiguities",
+          "type": "array"
+        },
+        "priority": {
+          "$ref": "#/$defs/Priority",
+          "default": "normal"
+        },
+        "accepted_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "intent_gate",
+          "title": "Accepted By"
+        },
+        "accepted_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accepted At"
+        }
+      },
+      "required": [
+        "user_intent",
+        "journey_type",
+        "platform",
+        "confidence"
+      ],
+      "title": "AcceptedIntent",
+      "type": "object"
+    },
+    "AttributionIndex": {
+      "additionalProperties": false,
+      "description": "Closed-world allowlists for Planner knowledge_source_ids / chunk refs.",
+      "properties": {
+        "by_document": {
+          "items": {
+            "type": "string"
+          },
+          "title": "By Document",
+          "type": "array"
+        },
+        "by_chunk": {
+          "items": {
+            "type": "string"
+          },
+          "title": "By Chunk",
+          "type": "array"
+        }
+      },
+      "title": "AttributionIndex",
+      "type": "object"
+    },
+    "DecisionKind": {
+      "enum": [
+        "use_skeleton_step",
+        "skip_optional",
+        "bind_entity",
+        "require_auth",
+        "flag_assumption",
+        "mark_unknown_requirement",
+        "order_steps",
+        "require_information"
+      ],
+      "title": "DecisionKind",
+      "type": "string"
+    },
+    "JourneySkeleton": {
+      "additionalProperties": false,
+      "description": "Loaded by orchestrator; Planner may only select/order/skip known steps.",
+      "properties": {
+        "skeleton_id": {
+          "title": "Skeleton Id",
+          "type": "string"
+        },
+        "journey_id": {
+          "title": "Journey Id",
+          "type": "string"
+        },
+        "intent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Intent"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Platform"
+        },
+        "journey_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Journey Type"
+        },
+        "product_domain": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Product Domain"
+        },
+        "version": {
+          "default": "1.0.0",
+          "title": "Version",
+          "type": "string"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/SkeletonStep"
+          },
+          "minItems": 1,
+          "title": "Steps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "skeleton_id",
+        "journey_id",
+        "steps"
+      ],
+      "title": "JourneySkeleton",
+      "type": "object"
+    },
+    "JourneyType": {
+      "enum": [
+        "acquisition",
+        "servicing",
+        "transaction",
+        "information",
+        "support"
+      ],
+      "title": "JourneyType",
+      "type": "string"
+    },
+    "KnowledgeConflict": {
+      "additionalProperties": false,
+      "properties": {
+        "conflict_id": {
+          "title": "Conflict Id",
+          "type": "string"
+        },
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "severity": {
+          "default": "warning",
+          "title": "Severity",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "conflict_id",
+        "document_ids",
+        "description"
+      ],
+      "title": "KnowledgeConflict",
+      "type": "object"
+    },
+    "KnowledgeExcerpt": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_id": {
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "section_path": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Section Path",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "relevance": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relevance"
+        }
+      },
+      "required": [
+        "chunk_id",
+        "document_id",
+        "text"
+      ],
+      "title": "KnowledgeExcerpt",
+      "type": "object"
+    },
+    "KnowledgePack": {
+      "additionalProperties": false,
+      "description": "Assembled pack written by Knowledge Retrieval; immutable for Planner.",
+      "properties": {
+        "pack_id": {
+          "title": "Pack Id",
+          "type": "string"
+        },
+        "registry_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Registry Version"
+        },
+        "query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Query Id"
+        },
+        "references": {
+          "items": {
+            "$ref": "#/$defs/KnowledgeReference"
+          },
+          "title": "References",
+          "type": "array"
+        },
+        "excerpts": {
+          "items": {
+            "$ref": "#/$defs/KnowledgeExcerpt"
+          },
+          "title": "Excerpts",
+          "type": "array"
+        },
+        "missing_knowledge": {
+          "items": {
+            "$ref": "#/$defs/MissingKnowledge"
+          },
+          "title": "Missing Knowledge",
+          "type": "array"
+        },
+        "conflicts": {
+          "items": {
+            "$ref": "#/$defs/KnowledgeConflict"
+          },
+          "title": "Conflicts",
+          "type": "array"
+        },
+        "attribution_index": {
+          "$ref": "#/$defs/AttributionIndex"
+        },
+        "retrieval_policy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "journey > product > platform > enterprise",
+          "title": "Retrieval Policy"
+        },
+        "assembled_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assembled At"
+        }
+      },
+      "required": [
+        "pack_id"
+      ],
+      "title": "KnowledgePack",
+      "type": "object"
+    },
+    "KnowledgeReference": {
+      "additionalProperties": false,
+      "description": "One document (or section slice) included in the pack.",
+      "properties": {
+        "asset_id": {
+          "description": "Document ID; citation key.",
+          "minLength": 1,
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "level": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Level",
+          "type": "integer"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "sections": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sections",
+          "type": "array"
+        },
+        "chunk_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Chunk Ids",
+          "type": "array"
+        },
+        "relevance": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relevance"
+        },
+        "freshness": {
+          "default": "current",
+          "title": "Freshness",
+          "type": "string"
+        },
+        "status": {
+          "default": "loaded",
+          "title": "Status",
+          "type": "string"
+        },
+        "authority_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authority Rank"
+        }
+      },
+      "required": [
+        "asset_id",
+        "level"
+      ],
+      "title": "KnowledgeReference",
+      "type": "object"
+    },
+    "MissingKnowledge": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "level": {
+          "anyOf": [
+            {
+              "maximum": 5,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Level"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "blocking": {
+          "default": false,
+          "title": "Blocking",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "asset_id",
+        "reason"
+      ],
+      "title": "MissingKnowledge",
+      "type": "object"
+    },
+    "PlannerConfig": {
+      "additionalProperties": false,
+      "description": "Orchestrator-supplied configuration. Immutable for the Planner call.",
+      "properties": {
+        "planner_prompt_version": {
+          "minLength": 1,
+          "title": "Planner Prompt Version",
+          "type": "string"
+        },
+        "decision_kinds_allowlist": {
+          "items": {
+            "$ref": "#/$defs/DecisionKind"
+          },
+          "title": "Decision Kinds Allowlist",
+          "type": "array"
+        },
+        "max_assumptions": {
+          "default": 20,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Max Assumptions",
+          "type": "integer"
+        },
+        "max_unknown_requirements": {
+          "default": 20,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Max Unknown Requirements",
+          "type": "integer"
+        },
+        "require_citation_on_decisions": {
+          "default": true,
+          "title": "Require Citation On Decisions",
+          "type": "boolean"
+        },
+        "allow_skip_only_optional_steps": {
+          "default": true,
+          "title": "Allow Skip Only Optional Steps",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "planner_prompt_version"
+      ],
+      "title": "PlannerConfig",
+      "type": "object"
+    },
+    "PlannerExecutionContext": {
+      "additionalProperties": false,
+      "description": "Tracing metadata only \u2014 maps to JourneyGenerationState.execution.",
+      "properties": {
+        "run_id": {
+          "format": "uuid",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "state_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State Id"
+        },
+        "current_stage": {
+          "const": "planning",
+          "default": "planning",
+          "title": "Current Stage",
+          "type": "string"
+        },
+        "orchestrator_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Orchestrator Version"
+        },
+        "repair_pass": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Repair Pass",
+          "type": "integer"
+        },
+        "parent_trace_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Trace Event Id"
+        }
+      },
+      "required": [
+        "run_id"
+      ],
+      "title": "PlannerExecutionContext",
+      "type": "object"
+    },
+    "Platform": {
+      "enum": [
+        "asknow",
+        "eva_dbu",
+        "web",
+        "mobile_native",
+        "unspecified"
+      ],
+      "title": "Platform",
+      "type": "string"
+    },
+    "Priority": {
+      "enum": [
+        "normal",
+        "high"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "ReplanContext": {
+      "additionalProperties": false,
+      "description": "Optional soft-fail replan payload from Decision/Router \u2014 no new retrieval.",
+      "properties": {
+        "validation_errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Validation Errors",
+          "type": "array"
+        },
+        "prior_decision_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Prior Decision Ids",
+          "type": "array"
+        }
+      },
+      "title": "ReplanContext",
+      "type": "object"
+    },
+    "SkeletonStep": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/SkeletonStepType"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "ordinal": {
+          "minimum": 0,
+          "title": "Ordinal",
+          "type": "integer"
+        },
+        "optional": {
+          "default": false,
+          "title": "Optional",
+          "type": "boolean"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "required_entity_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Entity Types",
+          "type": "array"
+        },
+        "suggested_field_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Suggested Field Ids",
+          "type": "array"
+        },
+        "allowed_knowledge_source_ids": {
+          "description": "If non-empty, step citations must be subset of this \u2229 pack.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Knowledge Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "ordinal"
+      ],
+      "title": "SkeletonStep",
+      "type": "object"
+    },
+    "SkeletonStepType": {
+      "enum": [
+        "interaction",
+        "auth_gate",
+        "decision",
+        "system",
+        "confirmation",
+        "terminal"
+      ],
+      "title": "SkeletonStepType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Strongly typed Planner input.\n\nBuilt by the orchestrator from JourneyGenerationState.\nAll fields are immutable for the duration of the Planner call.\nAgent must not mutate this object or the underlying state.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "intent_accepted": {
+      "$ref": "#/$defs/AcceptedIntent"
+    },
+    "knowledge_pack": {
+      "$ref": "#/$defs/KnowledgePack"
+    },
+    "skeleton": {
+      "$ref": "#/$defs/JourneySkeleton"
+    },
+    "config": {
+      "$ref": "#/$defs/PlannerConfig"
+    },
+    "execution": {
+      "$ref": "#/$defs/PlannerExecutionContext"
+    },
+    "replan_context": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ReplanContext"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "intent_accepted",
+    "knowledge_pack",
+    "skeleton",
+    "config",
+    "execution"
+  ],
+  "title": "PlannerInput",
+  "type": "object"
+}
