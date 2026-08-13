@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "intent_proposal",
+  "intent_status": "unknown",
+  "proposal_ok": true,
+  "user_intent": "UNKNOWN",
+  "journey_type": null,
+  "product_domain": null,
+  "platform_hint": null,
+  "entities": [],
+  "confidence": 0.1,
+  "ambiguities": [
+    {
+      "field": "user_intent",
+      "candidates": [],
+      "note": "Utterance appears to be an instruction-injection attempt rather than a banking request."
+    }
+  ],
+  "priority_hint": null,
+  "rationale": "Utterance appears to be an instruction-injection attempt rather than a banking request.",
+  "error": null
+}

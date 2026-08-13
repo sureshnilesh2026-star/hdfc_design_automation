@@ -1,0 +1,320 @@
+{
+  "state_id": "05ea13d0-de9e-4a22-acf7-a465198667e2",
+  "schema_version": "1.0",
+  "created_at": "2026-08-13T17:01:49.032864Z",
+  "updated_at": "2026-08-13T17:01:49.034191Z",
+  "business": {
+    "status": "escalated",
+    "input": {
+      "raw": {
+        "modality": "text",
+        "text": "I want to block my card and update address",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "received_at": null
+      },
+      "normalized": {
+        "request_id": "1d940eb6-1045-4c9f-91d4-c82e615ab962",
+        "modality": "text",
+        "raw_text": "I want to block my card and update address",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "customer_context": {},
+        "timestamp": null
+      }
+    },
+    "intent": {
+      "proposal": {
+        "user_intent": "BLOCK_CARD",
+        "journey_type": "servicing",
+        "platform": null,
+        "product_domain": "cards",
+        "entities": [],
+        "confidence": 0.55,
+        "ambiguities": [
+          {
+            "field": "user_intent",
+            "candidates": [
+              "BLOCK_CARD",
+              "UPDATE_ADDRESS"
+            ],
+            "note": "Utterance matches multiple enterprise intents equally."
+          }
+        ],
+        "priority_hint": "normal",
+        "rationale": "Utterance keywords matched registry intent BLOCK_CARD; 0 entities extracted literally."
+      },
+      "accepted": null
+    },
+    "knowledge": null,
+    "planning": {
+      "skeleton_id": null,
+      "decisions": [],
+      "assumptions": [],
+      "unknown_requirements": [],
+      "entity_bindings": [],
+      "required_information": [],
+      "ordered_step_ids": [],
+      "skipped_optional_step_ids": [],
+      "selected_step_ids": [],
+      "knowledge_references": [],
+      "confidence": null,
+      "planner_status": null,
+      "plan_artifact_type": null,
+      "plan_schema_version": null,
+      "error": null,
+      "contract_validation_report": null,
+      "repair_audit": null,
+      "router_decision": null
+    },
+    "generation": {
+      "blueprint_draft": null,
+      "blueprint_normalized": null,
+      "blueprint_final": null
+    },
+    "validation": {
+      "result": "pending",
+      "report": {},
+      "attempt": 0,
+      "validated_at": null,
+      "validator_id": null
+    },
+    "hitl": {
+      "required": true,
+      "reasons": [
+        "Intent rejected without clarification budget remaining; escalate to human.",
+        "failure_class=repair_exhausted",
+        "Unresolved ambiguity on: user_intent. The agent explicitly declined to guess; clarification is required before the journey is planned.",
+        "Model confidence 0.55 is below floor 0.70."
+      ],
+      "pending_questions": [
+        {
+          "field": "user_intent",
+          "question": "The customer's request is ambiguous on 'user_intent'. Please confirm the intended reading."
+        }
+      ],
+      "ticket": null
+    },
+    "errors": [],
+    "output": {
+      "kind": "escalation",
+      "blueprint_id": null,
+      "escalation_id": null,
+      "completed_at": null
+    }
+  },
+  "execution": {
+    "run_id": "b024b185-548a-4e93-9c33-be1db0b1f62a",
+    "orchestrator_version": "0.1.0",
+    "current_stage": "intent",
+    "stage_history": [
+      {
+        "stage": "intent",
+        "entered_at": "2026-08-13T17:01:49.032963Z",
+        "exited_at": "2026-08-13T17:01:49.034172Z",
+        "outcome": "escalated"
+      }
+    ],
+    "agents": {
+      "intent": {
+        "model": null,
+        "prompt_version": "intent-system-v1",
+        "latency_ms": 0.6036450000692639,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": true,
+        "repair_pass": 1
+      },
+      "planner": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      }
+    },
+    "tools_invoked": [],
+    "gates": {
+      "intent_gate": "failed",
+      "knowledge_gate": "not_run",
+      "validation_gate": "not_run"
+    },
+    "config_snapshot": {
+      "intent_allowlist": [
+        "APPLY_CREDIT_CARD",
+        "UPDATE_ADDRESS",
+        "BLOCK_CARD",
+        "CHECK_BALANCE"
+      ],
+      "platform_allowlist": [
+        "asknow",
+        "eva_dbu",
+        "web",
+        "mobile_native"
+      ],
+      "confidence_floor": 0.7,
+      "max_planner_repairs": 1,
+      "planner_prompt_version": "planner-system-v1",
+      "llm_model": null
+    },
+    "trace": [
+      {
+        "event_id": "7ed66157-7e2f-40c8-b08a-b8a418cf1495",
+        "at": "2026-08-13T17:01:49.033482Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "route_eval_clarify",
+        "evidence_refs": [],
+        "detail": {
+          "action": "clarify",
+          "failure_class": "ambiguous",
+          "reason": "Clarifiable intent gap ['confidence_below_floor', 'unresolved_ambiguity']; one clarification round granted.",
+          "repair_pass": 0,
+          "max_clarifications": 1,
+          "gate_accepted": false
+        }
+      },
+      {
+        "event_id": "cab949d2-350b-4ea2-8b83-47d9e6adecad",
+        "at": "2026-08-13T17:01:49.033920Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "route_eval_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "repair_exhausted",
+          "reason": "Intent rejected without clarification budget remaining; escalate to human.",
+          "repair_pass": 1,
+          "max_clarifications": 1,
+          "gate_accepted": false
+        }
+      },
+      {
+        "event_id": "dd359728-0478-45eb-bf90-e7f7a0d4a22c",
+        "at": "2026-08-13T17:01:49.034044Z",
+        "stage": "intent",
+        "actor": "llm",
+        "component": "intent_recognition_agent",
+        "decision": "intent_proposal_emitted",
+        "evidence_refs": [],
+        "detail": {
+          "intent_status": "proposed_with_ambiguity",
+          "proposal_ok": true,
+          "user_intent": "BLOCK_CARD",
+          "confidence": 0.55,
+          "ambiguity_fields": [
+            "user_intent"
+          ],
+          "entity_types": [],
+          "model": null,
+          "prompt_version": "intent-system-v1",
+          "latency_ms": 0.6036450000692639,
+          "structured_output_ok": true,
+          "error": null,
+          "contract_validation_passed": true,
+          "grants_acceptance": false,
+          "repair_pass": 1
+        }
+      },
+      {
+        "event_id": "70a789c5-8b31-49bc-b1f1-26406bc73c10",
+        "at": "2026-08-13T17:01:49.034062Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_merge",
+        "decision": "merged_intent_proposal_into_business_intent",
+        "evidence_refs": [],
+        "detail": {
+          "written_paths": [
+            "business.intent.proposal",
+            "execution.agents.intent",
+            "execution.trace"
+          ],
+          "forbidden_paths_untouched": [
+            "business.intent.accepted",
+            "business.input",
+            "business.knowledge",
+            "business.planning",
+            "business.validation",
+            "business.hitl",
+            "business.output",
+            "execution.gates"
+          ]
+        }
+      },
+      {
+        "event_id": "bd28dc73-3465-4fa1-8f79-3337eb01a409",
+        "at": "2026-08-13T17:01:49.034092Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_gate",
+        "decision": "intent_rejected",
+        "evidence_refs": [],
+        "detail": {
+          "verdict": "rejected",
+          "gate_id": "intent_gate_deterministic_v1",
+          "reason_codes": [
+            "unresolved_ambiguity",
+            "confidence_below_floor"
+          ],
+          "reasons": [
+            "Unresolved ambiguity on: user_intent. The agent explicitly declined to guess; clarification is required before the journey is planned.",
+            "Model confidence 0.55 is below floor 0.70."
+          ],
+          "overrides": [
+            {
+              "field": "platform",
+              "reason": "platform_from_channel_hint",
+              "model_value": null,
+              "accepted_value": "asknow"
+            }
+          ],
+          "dropped_entity_types": [],
+          "unresolved_ambiguity_fields": [
+            "user_intent"
+          ],
+          "model_confidence": 0.55,
+          "confidence_floor_applied": 0.7
+        }
+      },
+      {
+        "event_id": "d4d22986-411b-4dbd-9215-9b36c09d8492",
+        "at": "2026-08-13T17:01:49.034172Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "router_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "repair_exhausted",
+          "reason": "Intent rejected without clarification budget remaining; escalate to human.",
+          "repair_pass": 1,
+          "max_clarifications": 1,
+          "gate_accepted": false,
+          "validation_passed": true,
+          "allow_continue": false,
+          "reason_codes": [
+            "unresolved_ambiguity",
+            "confidence_below_floor"
+          ],
+          "structural_codes": [],
+          "clarifiable_codes": [
+            "confidence_below_floor",
+            "unresolved_ambiguity"
+          ],
+          "clarify_attempted": true
+        }
+      }
+    ]
+  }
+}
