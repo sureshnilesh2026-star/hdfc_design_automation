@@ -1,0 +1,447 @@
+{
+  "state_id": "33333333-3333-3333-3333-333333333333",
+  "schema_version": "1.0",
+  "created_at": "2026-08-12T10:38:09.616674Z",
+  "updated_at": "2026-08-12T10:38:09.618302Z",
+  "business": {
+    "status": "escalated",
+    "input": {
+      "raw": {
+        "modality": "text",
+        "text": "I want to change my address.",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "received_at": null
+      },
+      "normalized": {
+        "request_id": "22222222-2222-2222-2222-222222222222",
+        "modality": "text",
+        "raw_text": "I want to change my address.",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "customer_context": {
+          "auth_state": "unknown",
+          "segment_hint": "ETB"
+        },
+        "timestamp": null
+      }
+    },
+    "intent": {
+      "proposal": null,
+      "accepted": {
+        "user_intent": "UPDATE_ADDRESS",
+        "journey_type": "servicing",
+        "platform": "asknow",
+        "product_domain": "customer_profile",
+        "entities": [
+          {
+            "type": "customer_id",
+            "value": "CUST-88991",
+            "raw_span": null,
+            "confidence": 0.91
+          },
+          {
+            "type": "address_type",
+            "value": "residential",
+            "raw_span": "address",
+            "confidence": 0.8
+          }
+        ],
+        "confidence": 0.9,
+        "ambiguities": [],
+        "priority": "normal",
+        "accepted_by": "intent_gate",
+        "accepted_at": null
+      }
+    },
+    "knowledge": {
+      "pack_id": "EMPTY|asknow|v1",
+      "registry_version": null,
+      "query_id": null,
+      "references": [],
+      "excerpts": [],
+      "missing_knowledge": [],
+      "conflicts": [],
+      "attribution_index": {
+        "by_document": [],
+        "by_chunk": []
+      },
+      "retrieval_policy": "journey > product > platform > enterprise",
+      "assembled_at": null
+    },
+    "planning": {
+      "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "decisions": [],
+      "assumptions": [],
+      "unknown_requirements": [],
+      "entity_bindings": [],
+      "required_information": [],
+      "ordered_step_ids": [],
+      "skipped_optional_step_ids": [],
+      "selected_step_ids": [],
+      "knowledge_references": [],
+      "confidence": null,
+      "planner_status": "failed",
+      "plan_artifact_type": null,
+      "plan_schema_version": null,
+      "error": {
+        "code": "uncitable_step",
+        "message": "KnowledgePack has no citable documents",
+        "retriable": false
+      },
+      "contract_validation_report": {
+        "report_id": "a87542bd-3619-427e-bb99-c611de8cee90",
+        "validator_id": "planner_output_deterministic_v1",
+        "validated_at": "2026-08-12T10:38:09.617641Z",
+        "official_journey_validation": false,
+        "artifact_type_expected": "journey_plan",
+        "overall_passed": true,
+        "layers": [
+          {
+            "layer": "schema",
+            "passed": true,
+            "violations": []
+          },
+          {
+            "layer": "referential_integrity",
+            "passed": true,
+            "violations": []
+          },
+          {
+            "layer": "knowledge_reference",
+            "passed": true,
+            "violations": []
+          },
+          {
+            "layer": "business_rule",
+            "passed": true,
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "warnings": [],
+        "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+        "input_pack_id": "EMPTY|asknow|v1",
+        "output_planner_status": "failed",
+        "output_planner_ok": false
+      },
+      "repair_audit": {
+        "original_output": {
+          "schema_version": "1.0.0",
+          "artifact_type": "journey_plan",
+          "planner_status": "failed",
+          "planner_ok": false,
+          "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "ordered_step_ids": [],
+          "skipped_optional_step_ids": [],
+          "selected_step_ids": [],
+          "decisions": [],
+          "entity_bindings": [],
+          "required_information": [],
+          "assumptions": [],
+          "unknown_requirements": [],
+          "knowledge_references": [],
+          "confidence": null,
+          "error": {
+            "code": "uncitable_step",
+            "message": "KnowledgePack has no citable documents",
+            "retriable": false
+          }
+        },
+        "original_validation": {
+          "report_id": "a87542bd-3619-427e-bb99-c611de8cee90",
+          "validator_id": "planner_output_deterministic_v1",
+          "validated_at": "2026-08-12T10:38:09.617641Z",
+          "official_journey_validation": false,
+          "artifact_type_expected": "journey_plan",
+          "overall_passed": true,
+          "layers": [
+            {
+              "layer": "schema",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "referential_integrity",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "knowledge_reference",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "business_rule",
+              "passed": true,
+              "violations": []
+            }
+          ],
+          "violations": [],
+          "warnings": [],
+          "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "input_pack_id": "EMPTY|asknow|v1",
+          "output_planner_status": "failed",
+          "output_planner_ok": false
+        },
+        "validation_errors": [],
+        "repair_attempted": false,
+        "repair_pass": 0,
+        "repaired_output": null,
+        "repaired_validation": null,
+        "final_validation": {
+          "report_id": "a87542bd-3619-427e-bb99-c611de8cee90",
+          "validator_id": "planner_output_deterministic_v1",
+          "validated_at": "2026-08-12T10:38:09.617641Z",
+          "official_journey_validation": false,
+          "artifact_type_expected": "journey_plan",
+          "overall_passed": true,
+          "layers": [
+            {
+              "layer": "schema",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "referential_integrity",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "knowledge_reference",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "business_rule",
+              "passed": true,
+              "violations": []
+            }
+          ],
+          "violations": [],
+          "warnings": [],
+          "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "input_pack_id": "EMPTY|asknow|v1",
+          "output_planner_status": "failed",
+          "output_planner_ok": false
+        },
+        "routing_decisions": [
+          {
+            "action": "escalate",
+            "failure_class": "planner_failed",
+            "reason": "Planner failed (uncitable_step); escalate",
+            "repair_pass": 0,
+            "max_repairs": 1,
+            "validation_passed": true,
+            "blocking_knowledge_gaps": [],
+            "high_risk_assumption_ids": [],
+            "structural_codes": [],
+            "repairable_codes": [],
+            "allow_continue": false
+          }
+        ],
+        "final_action": "escalate",
+        "final_failure_class": "planner_failed"
+      },
+      "router_decision": {
+        "action": "escalate",
+        "failure_class": "planner_failed",
+        "reason": "Planner failed (uncitable_step); escalate",
+        "repair_pass": 0,
+        "max_repairs": 1,
+        "validation_passed": true,
+        "blocking_knowledge_gaps": [],
+        "high_risk_assumption_ids": [],
+        "structural_codes": [],
+        "repairable_codes": [],
+        "allow_continue": false
+      }
+    },
+    "generation": {
+      "blueprint_draft": null,
+      "blueprint_normalized": null,
+      "blueprint_final": null
+    },
+    "validation": {
+      "result": "pending",
+      "report": {},
+      "attempt": 0,
+      "validated_at": null,
+      "validator_id": null
+    },
+    "hitl": {
+      "required": true,
+      "reasons": [
+        "Planner failed (uncitable_step); escalate",
+        "failure_class=planner_failed"
+      ],
+      "pending_questions": [],
+      "ticket": null
+    },
+    "errors": [],
+    "output": {
+      "kind": "escalation",
+      "blueprint_id": null,
+      "escalation_id": null,
+      "completed_at": null
+    }
+  },
+  "execution": {
+    "run_id": "22222222-2222-2222-2222-222222222222",
+    "orchestrator_version": "0.1.0",
+    "current_stage": "planning",
+    "stage_history": [
+      {
+        "stage": "planning",
+        "entered_at": "2026-08-12T10:38:09.617086Z",
+        "exited_at": "2026-08-12T10:38:09.618259Z",
+        "outcome": "escalated"
+      }
+    ],
+    "agents": {
+      "intent": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      },
+      "planner": {
+        "model": "deterministic-planner-v1",
+        "prompt_version": "planner-system-v1",
+        "latency_ms": 0.5139999993843958,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": false,
+        "repair_pass": 0
+      }
+    },
+    "tools_invoked": [],
+    "gates": {
+      "intent_gate": "passed",
+      "knowledge_gate": "passed",
+      "validation_gate": "not_run"
+    },
+    "config_snapshot": {
+      "intent_allowlist": [
+        "UPDATE_ADDRESS"
+      ],
+      "platform_allowlist": [
+        "asknow"
+      ],
+      "confidence_floor": 0.7,
+      "max_planner_repairs": 1,
+      "planner_prompt_version": "planner-system-v1",
+      "llm_model": "deterministic-planner-v1"
+    },
+    "trace": [
+      {
+        "event_id": "4dbc70d4-5952-4931-ba85-0aac862e3421",
+        "at": "2026-08-12T10:38:09.617829Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "orchestrator.router",
+        "decision": "route_eval_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "planner_failed",
+          "reason": "Planner failed (uncitable_step); escalate",
+          "repair_pass": 0,
+          "max_repairs": 1,
+          "validation_passed": true
+        }
+      },
+      {
+        "event_id": "3eedd75c-94d3-450f-a2e0-23a832aa47f1",
+        "at": "2026-08-12T10:38:09.618067Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "journey_planner_agent",
+        "decision": "planning_output_merged_pending_router",
+        "evidence_refs": [],
+        "detail": {
+          "planner_status": "failed",
+          "planner_ok": false,
+          "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "ordered_step_ids": [],
+          "assumption_ids": [],
+          "unknown_requirement_ids": [],
+          "model": "deterministic-planner-v1",
+          "prompt_version": "planner-system-v1",
+          "latency_ms": 0.5139999993843958,
+          "structured_output_ok": false,
+          "error": {
+            "code": "uncitable_step",
+            "message": "KnowledgePack has no citable documents",
+            "retriable": false
+          },
+          "contract_validation_passed": true,
+          "official_journey_validation": false,
+          "repair_pass": 0
+        }
+      },
+      {
+        "event_id": "8d859458-2399-4e45-8460-844ab7c9db14",
+        "at": "2026-08-12T10:38:09.618113Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "orchestrator.planning_merge",
+        "decision": "merged_planner_output_into_business_planning",
+        "evidence_refs": [],
+        "detail": {
+          "written_paths": [
+            "business.planning.decisions",
+            "business.planning.assumptions",
+            "business.planning.unknown_requirements",
+            "business.planning.entity_bindings",
+            "business.planning.required_information",
+            "business.planning.ordered_step_ids",
+            "business.status",
+            "execution.agents.planner",
+            "execution.trace"
+          ],
+          "forbidden_paths_untouched": [
+            "business.intent.accepted",
+            "business.knowledge",
+            "business.validation",
+            "business.output",
+            "business.hitl",
+            "business.generation.blueprint_final",
+            "execution.gates"
+          ]
+        }
+      },
+      {
+        "event_id": "bac7478d-cf93-4577-8595-b5ebdffb15c1",
+        "at": "2026-08-12T10:38:09.618259Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "orchestrator.router",
+        "decision": "router_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "planner_failed",
+          "reason": "Planner failed (uncitable_step); escalate",
+          "repair_pass": 0,
+          "max_repairs": 1,
+          "validation_passed": true,
+          "allow_continue": false,
+          "blocking_knowledge_gaps": [],
+          "high_risk_assumption_ids": [],
+          "structural_codes": [],
+          "repairable_codes": [],
+          "repair_attempted": false,
+          "official_journey_validation": false
+        }
+      }
+    ]
+  }
+}

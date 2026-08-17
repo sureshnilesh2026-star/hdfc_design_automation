@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0.0",
+  "intent_accepted": {
+    "user_intent": "APPLY_CREDIT_CARD",
+    "journey_type": "acquisition",
+    "platform": "asknow",
+    "product_domain": "credit_cards",
+    "entities": [
+      {
+        "type": "product",
+        "value": "credit_card",
+        "raw_span": null,
+        "confidence": 0.92
+      }
+    ],
+    "confidence": 0.88,
+    "ambiguities": [],
+    "priority": "normal",
+    "accepted_by": "intent_gate",
+    "accepted_at": null
+  },
+  "knowledge_pack": {
+    "pack_id": "APPLY_CREDIT_CARD|asknow|v1",
+    "registry_version": "test-registry-1",
+    "query_id": null,
+    "references": [
+      {
+        "asset_id": "PROD-CC-001",
+        "level": 2,
+        "path": null,
+        "sections": [],
+        "chunk_ids": [],
+        "relevance": null,
+        "freshness": "current",
+        "status": "loaded",
+        "authority_rank": null
+      },
+      {
+        "asset_id": "PLT-ASK-001",
+        "level": 3,
+        "path": null,
+        "sections": [],
+        "chunk_ids": [],
+        "relevance": null,
+        "freshness": "current",
+        "status": "loaded",
+        "authority_rank": null
+      },
+      {
+        "asset_id": "JOURNEY-CC-APPLY-STUB",
+        "level": 4,
+        "path": null,
+        "sections": [],
+        "chunk_ids": [],
+        "relevance": null,
+        "freshness": "current",
+        "status": "stub",
+        "authority_rank": null
+      }
+    ],
+    "excerpts": [
+      {
+        "chunk_id": "PLT-ASK-001#auth",
+        "document_id": "PLT-ASK-001",
+        "section_path": [
+          "Authentication"
+        ],
+        "text": "Protected activities require authentication before execution.",
+        "relevance": 0.95
+      },
+      {
+        "chunk_id": "JOURNEY-CC-APPLY-STUB#steps",
+        "document_id": "JOURNEY-CC-APPLY-STUB",
+        "section_path": [
+          "Steps"
+        ],
+        "text": "Skeleton steps: auth_gate, collect_profile, optional_upsell, submit.",
+        "relevance": 0.99
+      }
+    ],
+    "missing_knowledge": [
+      {
+        "asset_id": "TECH-CC-APPLY-APIS",
+        "level": 5,
+        "reason": "required_but_absent",
+        "blocking": true
+      }
+    ],
+    "conflicts": [],
+    "attribution_index": {
+      "by_document": [
+        "JOURNEY-CC-APPLY-STUB",
+        "PLT-ASK-001",
+        "PROD-CC-001"
+      ],
+      "by_chunk": [
+        "JOURNEY-CC-APPLY-STUB#steps",
+        "PLT-ASK-001#auth"
+      ]
+    },
+    "retrieval_policy": "journey > product > platform > enterprise",
+    "assembled_at": null
+  },
+  "skeleton": {
+    "skeleton_id": "JOURNEY-CC-APPLY-STUB",
+    "journey_id": "JN-CC-APPLY",
+    "intent": "APPLY_CREDIT_CARD",
+    "platform": "asknow",
+    "journey_type": "acquisition",
+    "product_domain": "credit_cards",
+    "version": "1.0.0",
+    "steps": [
+      {
+        "id": "auth_gate",
+        "type": "auth_gate",
+        "name": "Authenticate",
+        "ordinal": 0,
+        "optional": false,
+        "description": null,
+        "required_entity_types": [],
+        "suggested_field_ids": [],
+        "allowed_knowledge_source_ids": []
+      },
+      {
+        "id": "collect_profile",
+        "type": "interaction",
+        "name": "Collect profile",
+        "ordinal": 1,
+        "optional": false,
+        "description": null,
+        "required_entity_types": [
+          "product"
+        ],
+        "suggested_field_ids": [
+          "product_interest",
+          "full_name"
+        ],
+        "allowed_knowledge_source_ids": []
+      },
+      {
+        "id": "optional_upsell",
+        "type": "interaction",
+        "name": "Optional upsell",
+        "ordinal": 2,
+        "optional": true,
+        "description": null,
+        "required_entity_types": [],
+        "suggested_field_ids": [],
+        "allowed_knowledge_source_ids": []
+      },
+      {
+        "id": "submit",
+        "type": "terminal",
+        "name": "Submit application",
+        "ordinal": 3,
+        "optional": false,
+        "description": null,
+        "required_entity_types": [],
+        "suggested_field_ids": [],
+        "allowed_knowledge_source_ids": []
+      }
+    ]
+  },
+  "config": {
+    "planner_prompt_version": "planner-system-v1",
+    "decision_kinds_allowlist": [
+      "use_skeleton_step",
+      "skip_optional",
+      "bind_entity",
+      "require_auth",
+      "flag_assumption",
+      "mark_unknown_requirement",
+      "order_steps",
+      "require_information"
+    ],
+    "max_assumptions": 20,
+    "max_unknown_requirements": 20,
+    "require_citation_on_decisions": true,
+    "allow_skip_only_optional_steps": true
+  },
+  "execution": {
+    "run_id": "11111111-1111-1111-1111-111111111111",
+    "state_id": null,
+    "current_stage": "planning",
+    "orchestrator_version": null,
+    "repair_pass": 0,
+    "parent_trace_event_id": null
+  },
+  "replan_context": null
+}

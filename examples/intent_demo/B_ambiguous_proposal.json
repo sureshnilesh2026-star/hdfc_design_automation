@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "intent_proposal",
+  "intent_status": "proposed_with_ambiguity",
+  "proposal_ok": true,
+  "user_intent": "BLOCK_CARD",
+  "journey_type": "servicing",
+  "product_domain": "cards",
+  "platform_hint": null,
+  "entities": [],
+  "confidence": 0.55,
+  "ambiguities": [
+    {
+      "field": "user_intent",
+      "candidates": [
+        "BLOCK_CARD",
+        "UPDATE_ADDRESS"
+      ],
+      "note": "Utterance matches multiple enterprise intents equally."
+    }
+  ],
+  "priority_hint": "normal",
+  "rationale": "Utterance keywords matched registry intent BLOCK_CARD; 0 entities extracted literally.",
+  "error": null
+}

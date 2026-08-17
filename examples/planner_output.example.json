@@ -1,0 +1,209 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "journey_plan",
+  "planner_status": "planned_with_unknowns",
+  "planner_ok": true,
+  "skeleton_id": "JOURNEY-CC-APPLY-STUB",
+  "ordered_step_ids": [
+    "auth_gate",
+    "collect_profile",
+    "submit"
+  ],
+  "skipped_optional_step_ids": [
+    "optional_upsell"
+  ],
+  "selected_step_ids": [
+    "auth_gate",
+    "collect_profile",
+    "submit"
+  ],
+  "decisions": [
+    {
+      "id": "d_auth",
+      "kind": "require_auth",
+      "subject": "auth_gate",
+      "rationale": "Protected apply actions require authentication",
+      "related_step_ids": [
+        "auth_gate",
+        "submit"
+      ],
+      "knowledge_source_ids": [
+        "PLT-ASK-001"
+      ],
+      "attributions": [
+        {
+          "kind": "knowledge_document",
+          "ref": "PLT-ASK-001"
+        },
+        {
+          "kind": "skeleton_step",
+          "ref": "auth_gate"
+        }
+      ]
+    },
+    {
+      "id": "d_use_collect",
+      "kind": "use_skeleton_step",
+      "subject": "collect_profile",
+      "rationale": "Collect required applicant profile data from skeleton",
+      "related_step_ids": [
+        "collect_profile"
+      ],
+      "knowledge_source_ids": [
+        "JOURNEY-CC-APPLY-STUB"
+      ],
+      "attributions": [
+        {
+          "kind": "knowledge_document",
+          "ref": "JOURNEY-CC-APPLY-STUB"
+        }
+      ]
+    },
+    {
+      "id": "d_skip_upsell",
+      "kind": "skip_optional",
+      "subject": "optional_upsell",
+      "rationale": "Optional upsell not required for core apply path",
+      "related_step_ids": [
+        "optional_upsell"
+      ],
+      "knowledge_source_ids": [
+        "JOURNEY-CC-APPLY-STUB"
+      ],
+      "attributions": [
+        {
+          "kind": "knowledge_document",
+          "ref": "JOURNEY-CC-APPLY-STUB"
+        }
+      ]
+    },
+    {
+      "id": "d_bind_product",
+      "kind": "bind_entity",
+      "subject": "product:credit_card",
+      "rationale": "Bind accepted product entity to collect_profile",
+      "related_step_ids": [
+        "collect_profile"
+      ],
+      "knowledge_source_ids": [
+        "PROD-CC-001"
+      ],
+      "attributions": [
+        {
+          "kind": "input_entity",
+          "ref": "product:credit_card"
+        },
+        {
+          "kind": "knowledge_document",
+          "ref": "PROD-CC-001"
+        }
+      ]
+    },
+    {
+      "id": "d_unknown_api",
+      "kind": "mark_unknown_requirement",
+      "subject": "TECH-CC-APPLY-APIS",
+      "rationale": "Level 5 API bindings missing from KnowledgePack",
+      "related_step_ids": [
+        "submit"
+      ],
+      "knowledge_source_ids": [
+        "JOURNEY-CC-APPLY-STUB"
+      ],
+      "attributions": [
+        {
+          "kind": "knowledge_document",
+          "ref": "JOURNEY-CC-APPLY-STUB"
+        }
+      ]
+    }
+  ],
+  "entity_bindings": [
+    {
+      "entity_type": "product",
+      "entity_value": "credit_card",
+      "target_step_id": "collect_profile",
+      "target_field_hint": "product_interest",
+      "knowledge_source_ids": [
+        "PROD-CC-001"
+      ],
+      "attributions": [
+        {
+          "kind": "input_entity",
+          "ref": "product:credit_card"
+        },
+        {
+          "kind": "knowledge_document",
+          "ref": "PROD-CC-001"
+        }
+      ]
+    }
+  ],
+  "required_information": [
+    {
+      "id": "full_name",
+      "name": "Full name",
+      "required": true,
+      "source": "user",
+      "pii": true,
+      "target_step_id": "collect_profile",
+      "data_type_hint": "string",
+      "knowledge_source_ids": [
+        "JOURNEY-CC-APPLY-STUB"
+      ],
+      "attributions": [
+        {
+          "kind": "knowledge_document",
+          "ref": "JOURNEY-CC-APPLY-STUB"
+        },
+        {
+          "kind": "skeleton_step",
+          "ref": "collect_profile"
+        }
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Submit API contract is unknown until Level 5 knowledge is added",
+      "risk": "high",
+      "must_confirm": true,
+      "related_step_ids": [
+        "submit"
+      ],
+      "knowledge_source_ids": [
+        "JOURNEY-CC-APPLY-STUB"
+      ]
+    }
+  ],
+  "unknown_requirements": [
+    {
+      "id": "U1",
+      "kind": "api",
+      "description": "Application submit API binding not present in KnowledgePack",
+      "blocking_hint": true,
+      "related_step_ids": [
+        "submit"
+      ],
+      "knowledge_source_ids": [
+        "JOURNEY-CC-APPLY-STUB"
+      ]
+    }
+  ],
+  "knowledge_references": [
+    "PLT-ASK-001",
+    "PROD-CC-001",
+    "JOURNEY-CC-APPLY-STUB"
+  ],
+  "confidence": {
+    "overall": 0.78,
+    "per_step": {
+      "auth_gate": 0.9,
+      "collect_profile": 0.85,
+      "submit": 0.55
+    },
+    "notes": "Submit confidence lowered due to missing Level 5 API knowledge"
+  },
+  "error": null
+}

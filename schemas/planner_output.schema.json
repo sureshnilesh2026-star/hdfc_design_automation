@@ -1,0 +1,551 @@
+{
+  "$defs": {
+    "AssumptionRisk": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "AssumptionRisk",
+      "type": "string"
+    },
+    "AttributionKind": {
+      "description": "What a planning decision cites as evidence.",
+      "enum": [
+        "knowledge_document",
+        "knowledge_chunk",
+        "input_entity",
+        "input_intent",
+        "skeleton_step",
+        "config"
+      ],
+      "title": "AttributionKind",
+      "type": "string"
+    },
+    "DecisionAttribution": {
+      "additionalProperties": false,
+      "description": "Every planning decision must cite at least one supplied fact.\n\nKnowledge document/chunk IDs must exist in KnowledgePack.attribution_index.",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/AttributionKind"
+        },
+        "ref": {
+          "description": "document_id, chunk_id, entity type:value, intent key, step id, or config key",
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "title": "DecisionAttribution",
+      "type": "object"
+    },
+    "DecisionKind": {
+      "enum": [
+        "use_skeleton_step",
+        "skip_optional",
+        "bind_entity",
+        "require_auth",
+        "flag_assumption",
+        "mark_unknown_requirement",
+        "order_steps",
+        "require_information"
+      ],
+      "title": "DecisionKind",
+      "type": "string"
+    },
+    "EntityBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_type": {
+          "title": "Entity Type",
+          "type": "string"
+        },
+        "entity_value": {
+          "title": "Entity Value",
+          "type": "string"
+        },
+        "target_step_id": {
+          "title": "Target Step Id",
+          "type": "string"
+        },
+        "target_field_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Field Hint"
+        },
+        "knowledge_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Knowledge Source Ids",
+          "type": "array"
+        },
+        "attributions": {
+          "items": {
+            "$ref": "#/$defs/DecisionAttribution"
+          },
+          "minItems": 1,
+          "title": "Attributions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "entity_type",
+        "entity_value",
+        "target_step_id",
+        "attributions"
+      ],
+      "title": "EntityBinding",
+      "type": "object"
+    },
+    "PlannerError": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "schema_invalid",
+            "uncitable_step",
+            "empty_plan",
+            "llm_failure",
+            "skeleton_mismatch",
+            "contract_violation"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retriable": {
+          "default": false,
+          "title": "Retriable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "PlannerError",
+      "type": "object"
+    },
+    "PlannerStatus": {
+      "description": "Planner artifact status \u2014 never equals Blueprint validation_status.",
+      "enum": [
+        "planned",
+        "planned_with_assumptions",
+        "planned_with_unknowns",
+        "failed"
+      ],
+      "title": "PlannerStatus",
+      "type": "string"
+    },
+    "PlanningAssumption": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "statement": {
+          "minLength": 1,
+          "title": "Statement",
+          "type": "string"
+        },
+        "risk": {
+          "$ref": "#/$defs/AssumptionRisk"
+        },
+        "must_confirm": {
+          "default": true,
+          "title": "Must Confirm",
+          "type": "boolean"
+        },
+        "related_step_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Step Ids",
+          "type": "array"
+        },
+        "knowledge_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Knowledge Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "statement",
+        "risk"
+      ],
+      "title": "PlanningAssumption",
+      "type": "object"
+    },
+    "PlanningConfidence": {
+      "additionalProperties": false,
+      "properties": {
+        "overall": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Overall",
+          "type": "number"
+        },
+        "per_step": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Per Step",
+          "type": "object"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "overall"
+      ],
+      "title": "PlanningConfidence",
+      "type": "object"
+    },
+    "PlanningDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/DecisionKind"
+        },
+        "subject": {
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "related_step_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Step Ids",
+          "type": "array"
+        },
+        "knowledge_source_ids": {
+          "description": "Document IDs from KnowledgePack only.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Knowledge Source Ids",
+          "type": "array"
+        },
+        "attributions": {
+          "description": "At least one attribution to pack knowledge or explicit input fact.",
+          "items": {
+            "$ref": "#/$defs/DecisionAttribution"
+          },
+          "minItems": 1,
+          "title": "Attributions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "subject",
+        "rationale",
+        "attributions"
+      ],
+      "title": "PlanningDecision",
+      "type": "object"
+    },
+    "RequiredInfoSource": {
+      "enum": [
+        "user",
+        "system",
+        "derived",
+        "api"
+      ],
+      "title": "RequiredInfoSource",
+      "type": "string"
+    },
+    "RequiredInformation": {
+      "additionalProperties": false,
+      "description": "Information the planned journey must collect or resolve \u2014 not Blueprint fields.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/$defs/RequiredInfoSource",
+          "default": "user"
+        },
+        "pii": {
+          "default": false,
+          "title": "Pii",
+          "type": "boolean"
+        },
+        "target_step_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Step Id"
+        },
+        "data_type_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data Type Hint"
+        },
+        "knowledge_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Knowledge Source Ids",
+          "type": "array"
+        },
+        "attributions": {
+          "items": {
+            "$ref": "#/$defs/DecisionAttribution"
+          },
+          "minItems": 1,
+          "title": "Attributions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "attributions"
+      ],
+      "title": "RequiredInformation",
+      "type": "object"
+    },
+    "UnknownRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/UnknownRequirementKind"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "blocking_hint": {
+          "default": true,
+          "title": "Blocking Hint",
+          "type": "boolean"
+        },
+        "related_step_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Step Ids",
+          "type": "array"
+        },
+        "knowledge_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Knowledge Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "description"
+      ],
+      "title": "UnknownRequirement",
+      "type": "object"
+    },
+    "UnknownRequirementKind": {
+      "enum": [
+        "api",
+        "policy",
+        "field",
+        "capability",
+        "eligibility",
+        "fee",
+        "other"
+      ],
+      "title": "UnknownRequirementKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Planning artifact only.\n\nForbidden: JourneyBlueprint fields (views, actions, api endpoint paths,\nvalidation_status=validated, platform_extensions as executable UI, etc.).\nDownstream Journey Generator transforms this + skeleton + pack into a draft Blueprint.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "artifact_type": {
+      "const": "journey_plan",
+      "default": "journey_plan",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "planner_status": {
+      "$ref": "#/$defs/PlannerStatus"
+    },
+    "planner_ok": {
+      "title": "Planner Ok",
+      "type": "boolean"
+    },
+    "skeleton_id": {
+      "title": "Skeleton Id",
+      "type": "string"
+    },
+    "ordered_step_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ordered Step Ids",
+      "type": "array"
+    },
+    "skipped_optional_step_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Skipped Optional Step Ids",
+      "type": "array"
+    },
+    "selected_step_ids": {
+      "description": "Convenience: ordered_step_ids; validated equal if both set.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Step Ids",
+      "type": "array"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/PlanningDecision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    },
+    "entity_bindings": {
+      "items": {
+        "$ref": "#/$defs/EntityBinding"
+      },
+      "title": "Entity Bindings",
+      "type": "array"
+    },
+    "required_information": {
+      "items": {
+        "$ref": "#/$defs/RequiredInformation"
+      },
+      "title": "Required Information",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "$ref": "#/$defs/PlanningAssumption"
+      },
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "unknown_requirements": {
+      "items": {
+        "$ref": "#/$defs/UnknownRequirement"
+      },
+      "title": "Unknown Requirements",
+      "type": "array"
+    },
+    "knowledge_references": {
+      "description": "Union of document IDs cited across the plan; must \u2286 pack.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Knowledge References",
+      "type": "array"
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PlanningConfidence"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PlannerError"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "planner_status",
+    "planner_ok",
+    "skeleton_id"
+  ],
+  "title": "PlannerOutput",
+  "type": "object"
+}

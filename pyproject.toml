@@ -1,0 +1,28 @@
+[project]
+name = "hdfc-design-automation"
+version = "0.1.0"
+description = "AI Agentic Journey Generation platform — contracts and agents"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.6,<3",
+]
+
+[project.optional-dependencies]
+llm = [
+  "openai>=1.40,<2",
+]
+dev = [
+  "pytest>=8.0",
+  "openai>=1.40,<2",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,17 @@
+{
+  "verdict": "rejected",
+  "gate_id": "intent_gate_deterministic_v1",
+  "evaluated_at": "2026-08-13T17:01:49.038834Z",
+  "accepted_intent": null,
+  "reason_codes": [
+    "platform_underivable"
+  ],
+  "reasons": [
+    "Platform is not derivable from channel_hint None; the model's platform_hint is not authoritative and will not be substituted."
+  ],
+  "overrides": [],
+  "dropped_entity_types": [],
+  "unresolved_ambiguity_fields": [],
+  "confidence_floor_applied": 0.7,
+  "model_confidence": 0.88
+}

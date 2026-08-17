@@ -1,0 +1,252 @@
+{
+  "state_id": "33333333-3333-3333-3333-333333333333",
+  "schema_version": "1.0",
+  "created_at": "2026-08-12T10:34:29.000049Z",
+  "updated_at": "2026-08-12T10:34:29.000050Z",
+  "business": {
+    "status": "knowledge_loaded",
+    "input": {
+      "raw": {
+        "modality": "text",
+        "text": "I want to change my address.",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "received_at": null
+      },
+      "normalized": {
+        "request_id": "22222222-2222-2222-2222-222222222222",
+        "modality": "text",
+        "raw_text": "I want to change my address.",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "customer_context": {
+          "auth_state": "unknown",
+          "segment_hint": "ETB"
+        },
+        "timestamp": null
+      }
+    },
+    "intent": {
+      "proposal": null,
+      "accepted": {
+        "user_intent": "UPDATE_ADDRESS",
+        "journey_type": "servicing",
+        "platform": "asknow",
+        "product_domain": "customer_profile",
+        "entities": [
+          {
+            "type": "customer_id",
+            "value": "CUST-88991",
+            "raw_span": null,
+            "confidence": 0.91
+          },
+          {
+            "type": "address_type",
+            "value": "residential",
+            "raw_span": "address",
+            "confidence": 0.8
+          }
+        ],
+        "confidence": 0.9,
+        "ambiguities": [],
+        "priority": "normal",
+        "accepted_by": "intent_gate",
+        "accepted_at": null
+      }
+    },
+    "knowledge": {
+      "pack_id": "UPDATE_ADDRESS|asknow|v1",
+      "registry_version": "test-registry-address-1",
+      "query_id": null,
+      "references": [
+        {
+          "asset_id": "ENT-PROFILE-001",
+          "level": 1,
+          "path": null,
+          "sections": [
+            "Customer profile servicing"
+          ],
+          "chunk_ids": [],
+          "relevance": null,
+          "freshness": "current",
+          "status": "loaded",
+          "authority_rank": null
+        },
+        {
+          "asset_id": "PLT-ASK-001",
+          "level": 3,
+          "path": null,
+          "sections": [
+            "Authentication",
+            "Journey Layer"
+          ],
+          "chunk_ids": [],
+          "relevance": null,
+          "freshness": "current",
+          "status": "loaded",
+          "authority_rank": null
+        },
+        {
+          "asset_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "level": 4,
+          "path": null,
+          "sections": [
+            "Steps",
+            "Required information"
+          ],
+          "chunk_ids": [],
+          "relevance": null,
+          "freshness": "current",
+          "status": "stub",
+          "authority_rank": null
+        }
+      ],
+      "excerpts": [
+        {
+          "chunk_id": "PLT-ASK-001#auth",
+          "document_id": "PLT-ASK-001",
+          "section_path": [
+            "Authentication"
+          ],
+          "text": "Protected servicing activities on AskNow require authentication before profile changes are accepted.",
+          "relevance": 0.94
+        },
+        {
+          "chunk_id": "JOURNEY-ADDR-UPDATE-STUB#steps",
+          "document_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "section_path": [
+            "Steps"
+          ],
+          "text": "Address change journey skeleton: authenticate, confirm customer, capture new address, review, submit. Optional communication preference step may be skipped.",
+          "relevance": 0.99
+        },
+        {
+          "chunk_id": "ENT-PROFILE-001#addr",
+          "document_id": "ENT-PROFILE-001",
+          "section_path": [
+            "Customer profile servicing"
+          ],
+          "text": "Customers may request updates to communication or residential address through approved digital servicing journeys.",
+          "relevance": 0.9
+        }
+      ],
+      "missing_knowledge": [
+        {
+          "asset_id": "TECH-ADDR-UPDATE-APIS",
+          "level": 5,
+          "reason": "required_but_absent",
+          "blocking": true
+        }
+      ],
+      "conflicts": [],
+      "attribution_index": {
+        "by_document": [
+          "ENT-PROFILE-001",
+          "JOURNEY-ADDR-UPDATE-STUB",
+          "PLT-ASK-001"
+        ],
+        "by_chunk": [
+          "ENT-PROFILE-001#addr",
+          "JOURNEY-ADDR-UPDATE-STUB#steps",
+          "PLT-ASK-001#auth"
+        ]
+      },
+      "retrieval_policy": "journey > product > platform > enterprise",
+      "assembled_at": null
+    },
+    "planning": {
+      "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "decisions": [],
+      "assumptions": [],
+      "unknown_requirements": [],
+      "entity_bindings": [],
+      "required_information": [],
+      "ordered_step_ids": [],
+      "skipped_optional_step_ids": [],
+      "selected_step_ids": [],
+      "knowledge_references": [],
+      "confidence": null,
+      "planner_status": null,
+      "plan_artifact_type": null,
+      "plan_schema_version": null,
+      "error": null,
+      "contract_validation_report": null,
+      "repair_audit": null,
+      "router_decision": null
+    },
+    "generation": {
+      "blueprint_draft": null,
+      "blueprint_normalized": null,
+      "blueprint_final": null
+    },
+    "validation": {
+      "result": "pending",
+      "report": {},
+      "attempt": 0,
+      "validated_at": null,
+      "validator_id": null
+    },
+    "hitl": {
+      "required": false,
+      "reasons": [],
+      "pending_questions": [],
+      "ticket": null
+    },
+    "errors": [],
+    "output": {
+      "kind": "none",
+      "blueprint_id": null,
+      "escalation_id": null,
+      "completed_at": null
+    }
+  },
+  "execution": {
+    "run_id": "22222222-2222-2222-2222-222222222222",
+    "orchestrator_version": "0.1.0",
+    "current_stage": "input",
+    "stage_history": [],
+    "agents": {
+      "intent": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      },
+      "planner": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      }
+    },
+    "tools_invoked": [],
+    "gates": {
+      "intent_gate": "passed",
+      "knowledge_gate": "passed",
+      "validation_gate": "not_run"
+    },
+    "config_snapshot": {
+      "intent_allowlist": [
+        "UPDATE_ADDRESS"
+      ],
+      "platform_allowlist": [
+        "asknow"
+      ],
+      "confidence_floor": 0.7,
+      "max_planner_repairs": 1,
+      "planner_prompt_version": "planner-system-v1",
+      "llm_model": "deterministic-planner-v1"
+    },
+    "trace": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "report_id": "c54d2c4f-bf47-4c86-9550-f7a68c16377c",
+  "validator_id": "planner_output_deterministic_v1",
+  "validated_at": "2026-08-12T10:38:09.600009Z",
+  "official_journey_validation": false,
+  "artifact_type_expected": "journey_plan",
+  "overall_passed": true,
+  "layers": [
+    {
+      "layer": "schema",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "layer": "referential_integrity",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "layer": "knowledge_reference",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "layer": "business_rule",
+      "passed": true,
+      "violations": []
+    }
+  ],
+  "violations": [],
+  "warnings": [],
+  "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+  "input_pack_id": "UPDATE_ADDRESS|asknow|v1",
+  "output_planner_status": "planned_with_unknowns",
+  "output_planner_ok": true
+}

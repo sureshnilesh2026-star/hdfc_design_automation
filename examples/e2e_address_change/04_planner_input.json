@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0.0",
+  "intent_accepted": {
+    "user_intent": "UPDATE_ADDRESS",
+    "journey_type": "servicing",
+    "platform": "asknow",
+    "product_domain": "customer_profile",
+    "entities": [
+      {
+        "type": "customer_id",
+        "value": "CUST-88991",
+        "raw_span": null,
+        "confidence": 0.91
+      },
+      {
+        "type": "address_type",
+        "value": "residential",
+        "raw_span": "address",
+        "confidence": 0.8
+      }
+    ],
+    "confidence": 0.9,
+    "ambiguities": [],
+    "priority": "normal",
+    "accepted_by": "intent_gate",
+    "accepted_at": null
+  },
+  "knowledge_pack": {
+    "pack_id": "UPDATE_ADDRESS|asknow|v1",
+    "registry_version": "test-registry-address-1",
+    "query_id": null,
+    "references": [
+      {
+        "asset_id": "ENT-PROFILE-001",
+        "level": 1,
+        "path": null,
+        "sections": [
+          "Customer profile servicing"
+        ],
+        "chunk_ids": [],
+        "relevance": null,
+        "freshness": "current",
+        "status": "loaded",
+        "authority_rank": null
+      },
+      {
+        "asset_id": "PLT-ASK-001",
+        "level": 3,
+        "path": null,
+        "sections": [
+          "Authentication",
+          "Journey Layer"
+        ],
+        "chunk_ids": [],
+        "relevance": null,
+        "freshness": "current",
+        "status": "loaded",
+        "authority_rank": null
+      },
+      {
+        "asset_id": "JOURNEY-ADDR-UPDATE-STUB",
+        "level": 4,
+        "path": null,
+        "sections": [
+          "Steps",
+          "Required information"
+        ],
+        "chunk_ids": [],
+        "relevance": null,
+        "freshness": "current",
+        "status": "stub",
+        "authority_rank": null
+      }
+    ],
+    "excerpts": [
+      {
+        "chunk_id": "PLT-ASK-001#auth",
+        "document_id": "PLT-ASK-001",
+        "section_path": [
+          "Authentication"
+        ],
+        "text": "Protected servicing activities on AskNow require authentication before profile changes are accepted.",
+        "relevance": 0.94
+      },
+      {
+        "chunk_id": "JOURNEY-ADDR-UPDATE-STUB#steps",
+        "document_id": "JOURNEY-ADDR-UPDATE-STUB",
+        "section_path": [
+          "Steps"
+        ],
+        "text": "Address change journey skeleton: authenticate, confirm customer, capture new address, review, submit. Optional communication preference step may be skipped.",
+        "relevance": 0.99
+      },
+      {
+        "chunk_id": "ENT-PROFILE-001#addr",
+        "document_id": "ENT-PROFILE-001",
+        "section_path": [
+          "Customer profile servicing"
+        ],
+        "text": "Customers may request updates to communication or residential address through approved digital servicing journeys.",
+        "relevance": 0.9
+      }
+    ],
+    "missing_knowledge": [
+      {
+        "asset_id": "TECH-ADDR-UPDATE-APIS",
+        "level": 5,
+        "reason": "required_but_absent",
+        "blocking": true
+      }
+    ],
+    "conflicts": [],
+    "attribution_index": {
+      "by_document": [
+        "ENT-PROFILE-001",
+        "JOURNEY-ADDR-UPDATE-STUB",
+        "PLT-ASK-001"
+      ],
+      "by_chunk": [
+        "ENT-PROFILE-001#addr",
+        "JOURNEY-ADDR-UPDATE-STUB#steps",
+        "PLT-ASK-001#auth"
+      ]
+    },
+    "retrieval_policy": "journey > product > platform > enterprise",
+    "assembled_at": null
+  },
+  "skeleton": {
+    "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+    "journey_id": "JN-ADDR-UPDATE",
+    "intent": "UPDATE_ADDRESS",
+    "platform": "asknow",
+    "journey_type": "servicing",
+    "product_domain": "customer_profile",
+    "version": "1.0.0",
+    "steps": [
+      {
+        "id": "auth_gate",
+        "type": "auth_gate",
+        "name": "Authenticate customer",
+        "ordinal": 0,
+        "optional": false,
+        "description": "Verify customer before profile mutation",
+        "required_entity_types": [],
+        "suggested_field_ids": [],
+        "allowed_knowledge_source_ids": [
+          "PLT-ASK-001",
+          "JOURNEY-ADDR-UPDATE-STUB"
+        ]
+      },
+      {
+        "id": "confirm_customer",
+        "type": "interaction",
+        "name": "Confirm customer context",
+        "ordinal": 1,
+        "optional": false,
+        "description": null,
+        "required_entity_types": [
+          "customer_id"
+        ],
+        "suggested_field_ids": [
+          "customer_id"
+        ],
+        "allowed_knowledge_source_ids": []
+      },
+      {
+        "id": "capture_new_address",
+        "type": "interaction",
+        "name": "Capture new address",
+        "ordinal": 2,
+        "optional": false,
+        "description": null,
+        "required_entity_types": [
+          "address_type"
+        ],
+        "suggested_field_ids": [
+          "address_line_1",
+          "address_line_2",
+          "city",
+          "state",
+          "postal_code",
+          "address_type"
+        ],
+        "allowed_knowledge_source_ids": []
+      },
+      {
+        "id": "optional_comm_pref",
+        "type": "interaction",
+        "name": "Update communication preferences",
+        "ordinal": 3,
+        "optional": true,
+        "description": null,
+        "required_entity_types": [],
+        "suggested_field_ids": [
+          "preferred_channel"
+        ],
+        "allowed_knowledge_source_ids": []
+      },
+      {
+        "id": "review_and_submit",
+        "type": "terminal",
+        "name": "Review and submit address change",
+        "ordinal": 4,
+        "optional": false,
+        "description": null,
+        "required_entity_types": [],
+        "suggested_field_ids": [
+          "confirmation_ack"
+        ],
+        "allowed_knowledge_source_ids": []
+      }
+    ]
+  },
+  "config": {
+    "planner_prompt_version": "planner-system-v1",
+    "decision_kinds_allowlist": [
+      "use_skeleton_step",
+      "skip_optional",
+      "bind_entity",
+      "require_auth",
+      "flag_assumption",
+      "mark_unknown_requirement",
+      "order_steps",
+      "require_information"
+    ],
+    "max_assumptions": 20,
+    "max_unknown_requirements": 20,
+    "require_citation_on_decisions": true,
+    "allow_skip_only_optional_steps": true
+  },
+  "execution": {
+    "run_id": "22222222-2222-2222-2222-222222222222",
+    "state_id": "33333333-3333-3333-3333-333333333333",
+    "current_stage": "planning",
+    "orchestrator_version": "0.1.0",
+    "repair_pass": 0,
+    "parent_trace_event_id": null
+  },
+  "replan_context": null
+}
