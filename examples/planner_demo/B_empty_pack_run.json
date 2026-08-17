@@ -1,0 +1,55 @@
+{
+  "scenario": "insufficient_knowledge_empty_pack",
+  "setup": "Empty KnowledgePack (no docs/excerpts). Same utterance + skeleton.",
+  "llm_stand_in_result": {
+    "planner_ok": false,
+    "planner_status": "failed",
+    "ordered_step_ids": [],
+    "error": {
+      "code": "uncitable_step",
+      "message": "KnowledgePack has no citable documents",
+      "retriable": false
+    },
+    "unknowns": [],
+    "assumptions": [],
+    "knowledge_references": [],
+    "llm_calls": 1
+  },
+  "validation": {
+    "overall_passed": true,
+    "official_journey_validation": false
+  },
+  "router": {
+    "action": "escalate",
+    "failure_class": "planner_failed",
+    "reason": "Planner failed (uncitable_step); escalate",
+    "repair_pass": 0,
+    "max_repairs": 1,
+    "validation_passed": true,
+    "blocking_knowledge_gaps": [],
+    "high_risk_assumption_ids": [],
+    "structural_codes": [],
+    "repairable_codes": [],
+    "allow_continue": false
+  },
+  "state": {
+    "status": "escalated",
+    "hitl_required": true,
+    "hitl_reasons": [
+      "Planner failed (uncitable_step); escalate",
+      "failure_class=planner_failed"
+    ],
+    "output_kind": "escalation",
+    "repair_attempted": false
+  },
+  "hallucination_counterfactual": {
+    "description": "If the LLM invented FAKE-ELIGIBILITY-DOC / TECH-ADDR-UPDATE-APIS as confirmed knowledge against an empty pack",
+    "validation_passed": false,
+    "violation_codes": [
+      "invented_knowledge_ref"
+    ],
+    "router_action": "escalate",
+    "router_failure_class": "structural",
+    "allow_continue": false
+  }
+}

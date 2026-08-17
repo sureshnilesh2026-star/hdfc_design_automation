@@ -1,0 +1,1923 @@
+{
+  "state_id": "33333333-3333-3333-3333-333333333333",
+  "schema_version": "1.0",
+  "created_at": "2026-08-12T10:34:28.996199Z",
+  "updated_at": "2026-08-12T10:34:28.999746Z",
+  "business": {
+    "status": "escalated",
+    "input": {
+      "raw": {
+        "modality": "text",
+        "text": "I want to change my address.",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "received_at": null
+      },
+      "normalized": {
+        "request_id": "22222222-2222-2222-2222-222222222222",
+        "modality": "text",
+        "raw_text": "I want to change my address.",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "customer_context": {
+          "auth_state": "unknown",
+          "segment_hint": "ETB"
+        },
+        "timestamp": null
+      }
+    },
+    "intent": {
+      "proposal": null,
+      "accepted": {
+        "user_intent": "UPDATE_ADDRESS",
+        "journey_type": "servicing",
+        "platform": "asknow",
+        "product_domain": "customer_profile",
+        "entities": [
+          {
+            "type": "customer_id",
+            "value": "CUST-88991",
+            "raw_span": null,
+            "confidence": 0.91
+          },
+          {
+            "type": "address_type",
+            "value": "residential",
+            "raw_span": "address",
+            "confidence": 0.8
+          }
+        ],
+        "confidence": 0.9,
+        "ambiguities": [],
+        "priority": "normal",
+        "accepted_by": "intent_gate",
+        "accepted_at": null
+      }
+    },
+    "knowledge": {
+      "pack_id": "UPDATE_ADDRESS|asknow|v1",
+      "registry_version": "test-registry-address-1",
+      "query_id": null,
+      "references": [
+        {
+          "asset_id": "ENT-PROFILE-001",
+          "level": 1,
+          "path": null,
+          "sections": [
+            "Customer profile servicing"
+          ],
+          "chunk_ids": [],
+          "relevance": null,
+          "freshness": "current",
+          "status": "loaded",
+          "authority_rank": null
+        },
+        {
+          "asset_id": "PLT-ASK-001",
+          "level": 3,
+          "path": null,
+          "sections": [
+            "Authentication",
+            "Journey Layer"
+          ],
+          "chunk_ids": [],
+          "relevance": null,
+          "freshness": "current",
+          "status": "loaded",
+          "authority_rank": null
+        },
+        {
+          "asset_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "level": 4,
+          "path": null,
+          "sections": [
+            "Steps",
+            "Required information"
+          ],
+          "chunk_ids": [],
+          "relevance": null,
+          "freshness": "current",
+          "status": "stub",
+          "authority_rank": null
+        }
+      ],
+      "excerpts": [
+        {
+          "chunk_id": "PLT-ASK-001#auth",
+          "document_id": "PLT-ASK-001",
+          "section_path": [
+            "Authentication"
+          ],
+          "text": "Protected servicing activities on AskNow require authentication before profile changes are accepted.",
+          "relevance": 0.94
+        },
+        {
+          "chunk_id": "JOURNEY-ADDR-UPDATE-STUB#steps",
+          "document_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "section_path": [
+            "Steps"
+          ],
+          "text": "Address change journey skeleton: authenticate, confirm customer, capture new address, review, submit. Optional communication preference step may be skipped.",
+          "relevance": 0.99
+        },
+        {
+          "chunk_id": "ENT-PROFILE-001#addr",
+          "document_id": "ENT-PROFILE-001",
+          "section_path": [
+            "Customer profile servicing"
+          ],
+          "text": "Customers may request updates to communication or residential address through approved digital servicing journeys.",
+          "relevance": 0.9
+        }
+      ],
+      "missing_knowledge": [
+        {
+          "asset_id": "TECH-ADDR-UPDATE-APIS",
+          "level": 5,
+          "reason": "required_but_absent",
+          "blocking": true
+        }
+      ],
+      "conflicts": [],
+      "attribution_index": {
+        "by_document": [
+          "ENT-PROFILE-001",
+          "JOURNEY-ADDR-UPDATE-STUB",
+          "PLT-ASK-001"
+        ],
+        "by_chunk": [
+          "ENT-PROFILE-001#addr",
+          "JOURNEY-ADDR-UPDATE-STUB#steps",
+          "PLT-ASK-001#auth"
+        ]
+      },
+      "retrieval_policy": "journey > product > platform > enterprise",
+      "assembled_at": null
+    },
+    "planning": {
+      "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "decisions": [
+        {
+          "id": "d_1",
+          "kind": "order_steps",
+          "subject": "auth_gate,confirm_customer,capture_new_address,review_and_submit",
+          "rationale": "Order required skeleton steps by ordinal; skip optionals",
+          "related_step_ids": [
+            "auth_gate",
+            "confirm_customer",
+            "capture_new_address",
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "auth_gate"
+            }
+          ]
+        },
+        {
+          "id": "d_2",
+          "kind": "use_skeleton_step",
+          "subject": "auth_gate",
+          "rationale": "Include required skeleton step auth_gate",
+          "related_step_ids": [
+            "auth_gate"
+          ],
+          "knowledge_source_ids": [
+            "PLT-ASK-001"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "PLT-ASK-001"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "auth_gate"
+            }
+          ]
+        },
+        {
+          "id": "d_3",
+          "kind": "require_auth",
+          "subject": "auth_gate",
+          "rationale": "Authentication gate required before protected servicing actions",
+          "related_step_ids": [
+            "auth_gate"
+          ],
+          "knowledge_source_ids": [
+            "PLT-ASK-001"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "PLT-ASK-001"
+            },
+            {
+              "kind": "input_intent",
+              "ref": "journey_type"
+            }
+          ]
+        },
+        {
+          "id": "d_4",
+          "kind": "use_skeleton_step",
+          "subject": "confirm_customer",
+          "rationale": "Include required skeleton step confirm_customer",
+          "related_step_ids": [
+            "confirm_customer"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "confirm_customer"
+            }
+          ]
+        },
+        {
+          "id": "d_5",
+          "kind": "use_skeleton_step",
+          "subject": "capture_new_address",
+          "rationale": "Include required skeleton step capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_6",
+          "kind": "use_skeleton_step",
+          "subject": "review_and_submit",
+          "rationale": "Include required skeleton step review_and_submit",
+          "related_step_ids": [
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "review_and_submit"
+            }
+          ]
+        },
+        {
+          "id": "d_7",
+          "kind": "skip_optional",
+          "subject": "optional_comm_pref",
+          "rationale": "Optional skeleton step optional_comm_pref not required for core path",
+          "related_step_ids": [
+            "optional_comm_pref"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "optional_comm_pref"
+            }
+          ]
+        },
+        {
+          "id": "d_8",
+          "kind": "bind_entity",
+          "subject": "customer_id:CUST-88991",
+          "rationale": "Bind accepted entity type customer_id to skeleton step confirm_customer",
+          "related_step_ids": [
+            "confirm_customer"
+          ],
+          "knowledge_source_ids": [
+            "ENT-PROFILE-001"
+          ],
+          "attributions": [
+            {
+              "kind": "input_entity",
+              "ref": "customer_id:CUST-88991"
+            },
+            {
+              "kind": "knowledge_document",
+              "ref": "ENT-PROFILE-001"
+            }
+          ]
+        },
+        {
+          "id": "d_9",
+          "kind": "bind_entity",
+          "subject": "address_type:residential",
+          "rationale": "Bind accepted entity type address_type to skeleton step capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "ENT-PROFILE-001"
+          ],
+          "attributions": [
+            {
+              "kind": "input_entity",
+              "ref": "address_type:residential"
+            },
+            {
+              "kind": "knowledge_document",
+              "ref": "ENT-PROFILE-001"
+            }
+          ]
+        },
+        {
+          "id": "d_10",
+          "kind": "require_information",
+          "subject": "customer_id",
+          "rationale": "Skeleton suggests collecting customer_id on confirm_customer",
+          "related_step_ids": [
+            "confirm_customer"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "confirm_customer"
+            }
+          ]
+        },
+        {
+          "id": "d_11",
+          "kind": "require_information",
+          "subject": "address_line_1",
+          "rationale": "Skeleton suggests collecting address_line_1 on capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_12",
+          "kind": "require_information",
+          "subject": "address_line_2",
+          "rationale": "Skeleton suggests collecting address_line_2 on capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_13",
+          "kind": "require_information",
+          "subject": "city",
+          "rationale": "Skeleton suggests collecting city on capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_14",
+          "kind": "require_information",
+          "subject": "state",
+          "rationale": "Skeleton suggests collecting state on capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_15",
+          "kind": "require_information",
+          "subject": "postal_code",
+          "rationale": "Skeleton suggests collecting postal_code on capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_16",
+          "kind": "require_information",
+          "subject": "address_type",
+          "rationale": "Skeleton suggests collecting address_type on capture_new_address",
+          "related_step_ids": [
+            "capture_new_address"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "d_17",
+          "kind": "require_information",
+          "subject": "confirmation_ack",
+          "rationale": "Skeleton suggests collecting confirmation_ack on review_and_submit",
+          "related_step_ids": [
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "review_and_submit"
+            }
+          ]
+        },
+        {
+          "id": "d_18",
+          "kind": "mark_unknown_requirement",
+          "subject": "TECH-ADDR-UPDATE-APIS",
+          "rationale": "KnowledgePack marks asset missing; do not invent facts",
+          "related_step_ids": [
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "config",
+              "ref": "knowledge_pack.missing_knowledge"
+            }
+          ]
+        },
+        {
+          "id": "d_19",
+          "kind": "flag_assumption",
+          "subject": "A_TECH-ADDR-UPDATE-APIS",
+          "rationale": "Explicit assumption required due to missing knowledge",
+          "related_step_ids": [
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            }
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "id": "A_TECH-ADDR-UPDATE-APIS",
+          "statement": "Proceeding without TECH-ADDR-UPDATE-APIS; downstream must confirm before treating related enterprise details as known.",
+          "risk": "high",
+          "must_confirm": true,
+          "related_step_ids": [
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "resolved": false,
+          "resolution": null
+        }
+      ],
+      "unknown_requirements": [
+        {
+          "id": "U_TECH-ADDR-UPDATE-APIS",
+          "kind": "api",
+          "description": "Required knowledge asset TECH-ADDR-UPDATE-APIS is unavailable (required_but_absent); cannot assert enterprise fact.",
+          "blocking_hint": true,
+          "related_step_ids": [
+            "review_and_submit"
+          ],
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ]
+        }
+      ],
+      "entity_bindings": [
+        {
+          "entity_type": "customer_id",
+          "entity_value": "CUST-88991",
+          "target_step_id": "confirm_customer",
+          "target_field_hint": "customer_id",
+          "knowledge_source_ids": [
+            "ENT-PROFILE-001"
+          ],
+          "attributions": [
+            {
+              "kind": "input_entity",
+              "ref": "customer_id:CUST-88991"
+            },
+            {
+              "kind": "knowledge_document",
+              "ref": "ENT-PROFILE-001"
+            }
+          ]
+        },
+        {
+          "entity_type": "address_type",
+          "entity_value": "residential",
+          "target_step_id": "capture_new_address",
+          "target_field_hint": "address_line_1",
+          "knowledge_source_ids": [
+            "ENT-PROFILE-001"
+          ],
+          "attributions": [
+            {
+              "kind": "input_entity",
+              "ref": "address_type:residential"
+            },
+            {
+              "kind": "knowledge_document",
+              "ref": "ENT-PROFILE-001"
+            }
+          ]
+        }
+      ],
+      "required_information": [
+        {
+          "id": "customer_id",
+          "name": "Customer Id",
+          "required": true,
+          "source": "user",
+          "pii": false,
+          "target_step_id": "confirm_customer",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "confirm_customer"
+            }
+          ]
+        },
+        {
+          "id": "address_line_1",
+          "name": "Address Line 1",
+          "required": true,
+          "source": "user",
+          "pii": true,
+          "target_step_id": "capture_new_address",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "address_line_2",
+          "name": "Address Line 2",
+          "required": true,
+          "source": "user",
+          "pii": true,
+          "target_step_id": "capture_new_address",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "city",
+          "name": "City",
+          "required": true,
+          "source": "user",
+          "pii": false,
+          "target_step_id": "capture_new_address",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "state",
+          "name": "State",
+          "required": true,
+          "source": "user",
+          "pii": false,
+          "target_step_id": "capture_new_address",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "postal_code",
+          "name": "Postal Code",
+          "required": true,
+          "source": "user",
+          "pii": false,
+          "target_step_id": "capture_new_address",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "address_type",
+          "name": "Address Type",
+          "required": true,
+          "source": "user",
+          "pii": true,
+          "target_step_id": "capture_new_address",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "capture_new_address"
+            }
+          ]
+        },
+        {
+          "id": "confirmation_ack",
+          "name": "Confirmation Ack",
+          "required": true,
+          "source": "user",
+          "pii": false,
+          "target_step_id": "review_and_submit",
+          "data_type_hint": "string",
+          "knowledge_source_ids": [
+            "JOURNEY-ADDR-UPDATE-STUB"
+          ],
+          "attributions": [
+            {
+              "kind": "knowledge_document",
+              "ref": "JOURNEY-ADDR-UPDATE-STUB"
+            },
+            {
+              "kind": "skeleton_step",
+              "ref": "review_and_submit"
+            }
+          ]
+        }
+      ],
+      "ordered_step_ids": [
+        "auth_gate",
+        "confirm_customer",
+        "capture_new_address",
+        "review_and_submit"
+      ],
+      "skipped_optional_step_ids": [
+        "optional_comm_pref"
+      ],
+      "selected_step_ids": [
+        "auth_gate",
+        "confirm_customer",
+        "capture_new_address",
+        "review_and_submit"
+      ],
+      "knowledge_references": [
+        "ENT-PROFILE-001",
+        "JOURNEY-ADDR-UPDATE-STUB",
+        "PLT-ASK-001"
+      ],
+      "confidence": {
+        "overall": 0.72,
+        "per_step": {
+          "auth_gate": 0.85,
+          "confirm_customer": 0.85,
+          "capture_new_address": 0.85,
+          "review_and_submit": 0.55
+        },
+        "notes": "Deterministic skeleton-bound plan; gaps/conflicts/ambiguities surfaced explicitly; excerpt/entity text not executed as instructions"
+      },
+      "planner_status": "planned_with_unknowns",
+      "plan_artifact_type": "journey_plan",
+      "plan_schema_version": "1.0.0",
+      "error": null,
+      "contract_validation_report": {
+        "report_id": "c5f5ee46-5d7c-422a-8970-96be6c60e031",
+        "validator_id": "planner_output_deterministic_v1",
+        "validated_at": "2026-08-12T10:34:28.998475Z",
+        "official_journey_validation": false,
+        "artifact_type_expected": "journey_plan",
+        "overall_passed": true,
+        "layers": [
+          {
+            "layer": "schema",
+            "passed": true,
+            "violations": []
+          },
+          {
+            "layer": "referential_integrity",
+            "passed": true,
+            "violations": []
+          },
+          {
+            "layer": "knowledge_reference",
+            "passed": true,
+            "violations": []
+          },
+          {
+            "layer": "business_rule",
+            "passed": true,
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "warnings": [],
+        "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+        "input_pack_id": "UPDATE_ADDRESS|asknow|v1",
+        "output_planner_status": "planned_with_unknowns",
+        "output_planner_ok": true
+      },
+      "repair_audit": {
+        "original_output": {
+          "schema_version": "1.0.0",
+          "artifact_type": "journey_plan",
+          "planner_status": "planned_with_unknowns",
+          "planner_ok": true,
+          "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "ordered_step_ids": [
+            "auth_gate",
+            "confirm_customer",
+            "capture_new_address",
+            "review_and_submit"
+          ],
+          "skipped_optional_step_ids": [
+            "optional_comm_pref"
+          ],
+          "selected_step_ids": [
+            "auth_gate",
+            "confirm_customer",
+            "capture_new_address",
+            "review_and_submit"
+          ],
+          "decisions": [
+            {
+              "id": "d_1",
+              "kind": "order_steps",
+              "subject": "auth_gate,confirm_customer,capture_new_address,review_and_submit",
+              "rationale": "Order required skeleton steps by ordinal; skip optionals",
+              "related_step_ids": [
+                "auth_gate",
+                "confirm_customer",
+                "capture_new_address",
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "auth_gate"
+                }
+              ]
+            },
+            {
+              "id": "d_2",
+              "kind": "use_skeleton_step",
+              "subject": "auth_gate",
+              "rationale": "Include required skeleton step auth_gate",
+              "related_step_ids": [
+                "auth_gate"
+              ],
+              "knowledge_source_ids": [
+                "PLT-ASK-001"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "PLT-ASK-001"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "auth_gate"
+                }
+              ]
+            },
+            {
+              "id": "d_3",
+              "kind": "require_auth",
+              "subject": "auth_gate",
+              "rationale": "Authentication gate required before protected servicing actions",
+              "related_step_ids": [
+                "auth_gate"
+              ],
+              "knowledge_source_ids": [
+                "PLT-ASK-001"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "PLT-ASK-001"
+                },
+                {
+                  "kind": "input_intent",
+                  "ref": "journey_type"
+                }
+              ]
+            },
+            {
+              "id": "d_4",
+              "kind": "use_skeleton_step",
+              "subject": "confirm_customer",
+              "rationale": "Include required skeleton step confirm_customer",
+              "related_step_ids": [
+                "confirm_customer"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "confirm_customer"
+                }
+              ]
+            },
+            {
+              "id": "d_5",
+              "kind": "use_skeleton_step",
+              "subject": "capture_new_address",
+              "rationale": "Include required skeleton step capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_6",
+              "kind": "use_skeleton_step",
+              "subject": "review_and_submit",
+              "rationale": "Include required skeleton step review_and_submit",
+              "related_step_ids": [
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "review_and_submit"
+                }
+              ]
+            },
+            {
+              "id": "d_7",
+              "kind": "skip_optional",
+              "subject": "optional_comm_pref",
+              "rationale": "Optional skeleton step optional_comm_pref not required for core path",
+              "related_step_ids": [
+                "optional_comm_pref"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "optional_comm_pref"
+                }
+              ]
+            },
+            {
+              "id": "d_8",
+              "kind": "bind_entity",
+              "subject": "customer_id:CUST-88991",
+              "rationale": "Bind accepted entity type customer_id to skeleton step confirm_customer",
+              "related_step_ids": [
+                "confirm_customer"
+              ],
+              "knowledge_source_ids": [
+                "ENT-PROFILE-001"
+              ],
+              "attributions": [
+                {
+                  "kind": "input_entity",
+                  "ref": "customer_id:CUST-88991"
+                },
+                {
+                  "kind": "knowledge_document",
+                  "ref": "ENT-PROFILE-001"
+                }
+              ]
+            },
+            {
+              "id": "d_9",
+              "kind": "bind_entity",
+              "subject": "address_type:residential",
+              "rationale": "Bind accepted entity type address_type to skeleton step capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "ENT-PROFILE-001"
+              ],
+              "attributions": [
+                {
+                  "kind": "input_entity",
+                  "ref": "address_type:residential"
+                },
+                {
+                  "kind": "knowledge_document",
+                  "ref": "ENT-PROFILE-001"
+                }
+              ]
+            },
+            {
+              "id": "d_10",
+              "kind": "require_information",
+              "subject": "customer_id",
+              "rationale": "Skeleton suggests collecting customer_id on confirm_customer",
+              "related_step_ids": [
+                "confirm_customer"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "confirm_customer"
+                }
+              ]
+            },
+            {
+              "id": "d_11",
+              "kind": "require_information",
+              "subject": "address_line_1",
+              "rationale": "Skeleton suggests collecting address_line_1 on capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_12",
+              "kind": "require_information",
+              "subject": "address_line_2",
+              "rationale": "Skeleton suggests collecting address_line_2 on capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_13",
+              "kind": "require_information",
+              "subject": "city",
+              "rationale": "Skeleton suggests collecting city on capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_14",
+              "kind": "require_information",
+              "subject": "state",
+              "rationale": "Skeleton suggests collecting state on capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_15",
+              "kind": "require_information",
+              "subject": "postal_code",
+              "rationale": "Skeleton suggests collecting postal_code on capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_16",
+              "kind": "require_information",
+              "subject": "address_type",
+              "rationale": "Skeleton suggests collecting address_type on capture_new_address",
+              "related_step_ids": [
+                "capture_new_address"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "d_17",
+              "kind": "require_information",
+              "subject": "confirmation_ack",
+              "rationale": "Skeleton suggests collecting confirmation_ack on review_and_submit",
+              "related_step_ids": [
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "review_and_submit"
+                }
+              ]
+            },
+            {
+              "id": "d_18",
+              "kind": "mark_unknown_requirement",
+              "subject": "TECH-ADDR-UPDATE-APIS",
+              "rationale": "KnowledgePack marks asset missing; do not invent facts",
+              "related_step_ids": [
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "config",
+                  "ref": "knowledge_pack.missing_knowledge"
+                }
+              ]
+            },
+            {
+              "id": "d_19",
+              "kind": "flag_assumption",
+              "subject": "A_TECH-ADDR-UPDATE-APIS",
+              "rationale": "Explicit assumption required due to missing knowledge",
+              "related_step_ids": [
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                }
+              ]
+            }
+          ],
+          "entity_bindings": [
+            {
+              "entity_type": "customer_id",
+              "entity_value": "CUST-88991",
+              "target_step_id": "confirm_customer",
+              "target_field_hint": "customer_id",
+              "knowledge_source_ids": [
+                "ENT-PROFILE-001"
+              ],
+              "attributions": [
+                {
+                  "kind": "input_entity",
+                  "ref": "customer_id:CUST-88991"
+                },
+                {
+                  "kind": "knowledge_document",
+                  "ref": "ENT-PROFILE-001"
+                }
+              ]
+            },
+            {
+              "entity_type": "address_type",
+              "entity_value": "residential",
+              "target_step_id": "capture_new_address",
+              "target_field_hint": "address_line_1",
+              "knowledge_source_ids": [
+                "ENT-PROFILE-001"
+              ],
+              "attributions": [
+                {
+                  "kind": "input_entity",
+                  "ref": "address_type:residential"
+                },
+                {
+                  "kind": "knowledge_document",
+                  "ref": "ENT-PROFILE-001"
+                }
+              ]
+            }
+          ],
+          "required_information": [
+            {
+              "id": "customer_id",
+              "name": "Customer Id",
+              "required": true,
+              "source": "user",
+              "pii": false,
+              "target_step_id": "confirm_customer",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "confirm_customer"
+                }
+              ]
+            },
+            {
+              "id": "address_line_1",
+              "name": "Address Line 1",
+              "required": true,
+              "source": "user",
+              "pii": true,
+              "target_step_id": "capture_new_address",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "address_line_2",
+              "name": "Address Line 2",
+              "required": true,
+              "source": "user",
+              "pii": true,
+              "target_step_id": "capture_new_address",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "city",
+              "name": "City",
+              "required": true,
+              "source": "user",
+              "pii": false,
+              "target_step_id": "capture_new_address",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "state",
+              "name": "State",
+              "required": true,
+              "source": "user",
+              "pii": false,
+              "target_step_id": "capture_new_address",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "postal_code",
+              "name": "Postal Code",
+              "required": true,
+              "source": "user",
+              "pii": false,
+              "target_step_id": "capture_new_address",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "address_type",
+              "name": "Address Type",
+              "required": true,
+              "source": "user",
+              "pii": true,
+              "target_step_id": "capture_new_address",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "capture_new_address"
+                }
+              ]
+            },
+            {
+              "id": "confirmation_ack",
+              "name": "Confirmation Ack",
+              "required": true,
+              "source": "user",
+              "pii": false,
+              "target_step_id": "review_and_submit",
+              "data_type_hint": "string",
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ],
+              "attributions": [
+                {
+                  "kind": "knowledge_document",
+                  "ref": "JOURNEY-ADDR-UPDATE-STUB"
+                },
+                {
+                  "kind": "skeleton_step",
+                  "ref": "review_and_submit"
+                }
+              ]
+            }
+          ],
+          "assumptions": [
+            {
+              "id": "A_TECH-ADDR-UPDATE-APIS",
+              "statement": "Proceeding without TECH-ADDR-UPDATE-APIS; downstream must confirm before treating related enterprise details as known.",
+              "risk": "high",
+              "must_confirm": true,
+              "related_step_ids": [
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ]
+            }
+          ],
+          "unknown_requirements": [
+            {
+              "id": "U_TECH-ADDR-UPDATE-APIS",
+              "kind": "api",
+              "description": "Required knowledge asset TECH-ADDR-UPDATE-APIS is unavailable (required_but_absent); cannot assert enterprise fact.",
+              "blocking_hint": true,
+              "related_step_ids": [
+                "review_and_submit"
+              ],
+              "knowledge_source_ids": [
+                "JOURNEY-ADDR-UPDATE-STUB"
+              ]
+            }
+          ],
+          "knowledge_references": [
+            "ENT-PROFILE-001",
+            "JOURNEY-ADDR-UPDATE-STUB",
+            "PLT-ASK-001"
+          ],
+          "confidence": {
+            "overall": 0.72,
+            "per_step": {
+              "auth_gate": 0.85,
+              "confirm_customer": 0.85,
+              "capture_new_address": 0.85,
+              "review_and_submit": 0.55
+            },
+            "notes": "Deterministic skeleton-bound plan; gaps/conflicts/ambiguities surfaced explicitly; excerpt/entity text not executed as instructions"
+          },
+          "error": null
+        },
+        "original_validation": {
+          "report_id": "c5f5ee46-5d7c-422a-8970-96be6c60e031",
+          "validator_id": "planner_output_deterministic_v1",
+          "validated_at": "2026-08-12T10:34:28.998475Z",
+          "official_journey_validation": false,
+          "artifact_type_expected": "journey_plan",
+          "overall_passed": true,
+          "layers": [
+            {
+              "layer": "schema",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "referential_integrity",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "knowledge_reference",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "business_rule",
+              "passed": true,
+              "violations": []
+            }
+          ],
+          "violations": [],
+          "warnings": [],
+          "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "input_pack_id": "UPDATE_ADDRESS|asknow|v1",
+          "output_planner_status": "planned_with_unknowns",
+          "output_planner_ok": true
+        },
+        "validation_errors": [],
+        "repair_attempted": false,
+        "repair_pass": 0,
+        "repaired_output": null,
+        "repaired_validation": null,
+        "final_validation": {
+          "report_id": "c5f5ee46-5d7c-422a-8970-96be6c60e031",
+          "validator_id": "planner_output_deterministic_v1",
+          "validated_at": "2026-08-12T10:34:28.998475Z",
+          "official_journey_validation": false,
+          "artifact_type_expected": "journey_plan",
+          "overall_passed": true,
+          "layers": [
+            {
+              "layer": "schema",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "referential_integrity",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "knowledge_reference",
+              "passed": true,
+              "violations": []
+            },
+            {
+              "layer": "business_rule",
+              "passed": true,
+              "violations": []
+            }
+          ],
+          "violations": [],
+          "warnings": [],
+          "input_skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "input_pack_id": "UPDATE_ADDRESS|asknow|v1",
+          "output_planner_status": "planned_with_unknowns",
+          "output_planner_ok": true
+        },
+        "routing_decisions": [
+          {
+            "action": "escalate",
+            "failure_class": "blocking_knowledge_gap",
+            "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+            "repair_pass": 0,
+            "max_repairs": 1,
+            "validation_passed": true,
+            "blocking_knowledge_gaps": [
+              "U_TECH-ADDR-UPDATE-APIS"
+            ],
+            "high_risk_assumption_ids": [
+              "A_TECH-ADDR-UPDATE-APIS"
+            ],
+            "structural_codes": [],
+            "repairable_codes": [],
+            "allow_continue": false
+          }
+        ],
+        "final_action": "escalate",
+        "final_failure_class": "blocking_knowledge_gap"
+      },
+      "router_decision": {
+        "action": "escalate",
+        "failure_class": "blocking_knowledge_gap",
+        "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+        "repair_pass": 0,
+        "max_repairs": 1,
+        "validation_passed": true,
+        "blocking_knowledge_gaps": [
+          "U_TECH-ADDR-UPDATE-APIS"
+        ],
+        "high_risk_assumption_ids": [
+          "A_TECH-ADDR-UPDATE-APIS"
+        ],
+        "structural_codes": [],
+        "repairable_codes": [],
+        "allow_continue": false
+      }
+    },
+    "generation": {
+      "blueprint_draft": null,
+      "blueprint_normalized": null,
+      "blueprint_final": null
+    },
+    "validation": {
+      "result": "pending",
+      "report": {},
+      "attempt": 0,
+      "validated_at": null,
+      "validator_id": null
+    },
+    "hitl": {
+      "required": true,
+      "reasons": [
+        "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+        "failure_class=blocking_knowledge_gap",
+        "blocking_knowledge_gaps=U_TECH-ADDR-UPDATE-APIS",
+        "high_risk_assumptions=A_TECH-ADDR-UPDATE-APIS"
+      ],
+      "pending_questions": [],
+      "ticket": null
+    },
+    "errors": [],
+    "output": {
+      "kind": "escalation",
+      "blueprint_id": null,
+      "escalation_id": null,
+      "completed_at": null
+    }
+  },
+  "execution": {
+    "run_id": "22222222-2222-2222-2222-222222222222",
+    "orchestrator_version": "0.1.0",
+    "current_stage": "planning",
+    "stage_history": [
+      {
+        "stage": "planning",
+        "entered_at": "2026-08-12T10:34:28.996913Z",
+        "exited_at": "2026-08-12T10:34:28.999711Z",
+        "outcome": "escalated"
+      }
+    ],
+    "agents": {
+      "intent": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      },
+      "planner": {
+        "model": "deterministic-planner-v1",
+        "prompt_version": "planner-system-v1",
+        "latency_ms": 1.5932999995129649,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": true,
+        "repair_pass": 0
+      }
+    },
+    "tools_invoked": [],
+    "gates": {
+      "intent_gate": "passed",
+      "knowledge_gate": "passed",
+      "validation_gate": "not_run"
+    },
+    "config_snapshot": {
+      "intent_allowlist": [
+        "UPDATE_ADDRESS"
+      ],
+      "platform_allowlist": [
+        "asknow"
+      ],
+      "confidence_floor": 0.7,
+      "max_planner_repairs": 1,
+      "planner_prompt_version": "planner-system-v1",
+      "llm_model": "deterministic-planner-v1"
+    },
+    "trace": [
+      {
+        "event_id": "f5225efe-354f-4684-8412-3115a0c3f1ad",
+        "at": "2026-08-12T10:34:28.998751Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "orchestrator.router",
+        "decision": "route_eval_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "blocking_knowledge_gap",
+          "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+          "repair_pass": 0,
+          "max_repairs": 1,
+          "validation_passed": true
+        }
+      },
+      {
+        "event_id": "2e17ec0a-f4e6-4db7-808f-ac17cfe0bd10",
+        "at": "2026-08-12T10:34:28.999385Z",
+        "stage": "planning",
+        "actor": "llm",
+        "component": "journey_planner_agent",
+        "decision": "planning_output_merged_pending_router",
+        "evidence_refs": [
+          "ENT-PROFILE-001",
+          "JOURNEY-ADDR-UPDATE-STUB",
+          "PLT-ASK-001"
+        ],
+        "detail": {
+          "planner_status": "planned_with_unknowns",
+          "planner_ok": true,
+          "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+          "ordered_step_ids": [
+            "auth_gate",
+            "confirm_customer",
+            "capture_new_address",
+            "review_and_submit"
+          ],
+          "assumption_ids": [
+            "A_TECH-ADDR-UPDATE-APIS"
+          ],
+          "unknown_requirement_ids": [
+            "U_TECH-ADDR-UPDATE-APIS"
+          ],
+          "model": "deterministic-planner-v1",
+          "prompt_version": "planner-system-v1",
+          "latency_ms": 1.5932999995129649,
+          "structured_output_ok": true,
+          "error": null,
+          "contract_validation_passed": true,
+          "official_journey_validation": false,
+          "repair_pass": 0
+        }
+      },
+      {
+        "event_id": "2f3c5bdf-6c5c-4041-b83d-531203482858",
+        "at": "2026-08-12T10:34:28.999431Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "orchestrator.planning_merge",
+        "decision": "merged_planner_output_into_business_planning",
+        "evidence_refs": [
+          "ENT-PROFILE-001",
+          "JOURNEY-ADDR-UPDATE-STUB",
+          "PLT-ASK-001"
+        ],
+        "detail": {
+          "written_paths": [
+            "business.planning.decisions",
+            "business.planning.assumptions",
+            "business.planning.unknown_requirements",
+            "business.planning.entity_bindings",
+            "business.planning.required_information",
+            "business.planning.ordered_step_ids",
+            "business.status",
+            "execution.agents.planner",
+            "execution.trace"
+          ],
+          "forbidden_paths_untouched": [
+            "business.intent.accepted",
+            "business.knowledge",
+            "business.validation",
+            "business.output",
+            "business.hitl",
+            "business.generation.blueprint_final",
+            "execution.gates"
+          ]
+        }
+      },
+      {
+        "event_id": "f23add87-af4e-4044-b6a6-1180571dd968",
+        "at": "2026-08-12T10:34:28.999711Z",
+        "stage": "planning",
+        "actor": "code",
+        "component": "orchestrator.router",
+        "decision": "router_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "blocking_knowledge_gap",
+          "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+          "repair_pass": 0,
+          "max_repairs": 1,
+          "validation_passed": true,
+          "allow_continue": false,
+          "blocking_knowledge_gaps": [
+            "U_TECH-ADDR-UPDATE-APIS"
+          ],
+          "high_risk_assumption_ids": [
+            "A_TECH-ADDR-UPDATE-APIS"
+          ],
+          "structural_codes": [],
+          "repairable_codes": [],
+          "repair_attempted": false,
+          "official_journey_validation": false
+        }
+      }
+    ]
+  }
+}

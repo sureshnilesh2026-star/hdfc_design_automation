@@ -1,0 +1,120 @@
+[
+  {
+    "event_id": "f5225efe-354f-4684-8412-3115a0c3f1ad",
+    "at": "2026-08-12T10:34:28.998751Z",
+    "stage": "planning",
+    "actor": "code",
+    "component": "orchestrator.router",
+    "decision": "route_eval_escalate",
+    "evidence_refs": [],
+    "detail": {
+      "action": "escalate",
+      "failure_class": "blocking_knowledge_gap",
+      "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+      "repair_pass": 0,
+      "max_repairs": 1,
+      "validation_passed": true
+    }
+  },
+  {
+    "event_id": "2e17ec0a-f4e6-4db7-808f-ac17cfe0bd10",
+    "at": "2026-08-12T10:34:28.999385Z",
+    "stage": "planning",
+    "actor": "llm",
+    "component": "journey_planner_agent",
+    "decision": "planning_output_merged_pending_router",
+    "evidence_refs": [
+      "ENT-PROFILE-001",
+      "JOURNEY-ADDR-UPDATE-STUB",
+      "PLT-ASK-001"
+    ],
+    "detail": {
+      "planner_status": "planned_with_unknowns",
+      "planner_ok": true,
+      "skeleton_id": "JOURNEY-ADDR-UPDATE-STUB",
+      "ordered_step_ids": [
+        "auth_gate",
+        "confirm_customer",
+        "capture_new_address",
+        "review_and_submit"
+      ],
+      "assumption_ids": [
+        "A_TECH-ADDR-UPDATE-APIS"
+      ],
+      "unknown_requirement_ids": [
+        "U_TECH-ADDR-UPDATE-APIS"
+      ],
+      "model": "deterministic-planner-v1",
+      "prompt_version": "planner-system-v1",
+      "latency_ms": 1.5932999995129649,
+      "structured_output_ok": true,
+      "error": null,
+      "contract_validation_passed": true,
+      "official_journey_validation": false,
+      "repair_pass": 0
+    }
+  },
+  {
+    "event_id": "2f3c5bdf-6c5c-4041-b83d-531203482858",
+    "at": "2026-08-12T10:34:28.999431Z",
+    "stage": "planning",
+    "actor": "code",
+    "component": "orchestrator.planning_merge",
+    "decision": "merged_planner_output_into_business_planning",
+    "evidence_refs": [
+      "ENT-PROFILE-001",
+      "JOURNEY-ADDR-UPDATE-STUB",
+      "PLT-ASK-001"
+    ],
+    "detail": {
+      "written_paths": [
+        "business.planning.decisions",
+        "business.planning.assumptions",
+        "business.planning.unknown_requirements",
+        "business.planning.entity_bindings",
+        "business.planning.required_information",
+        "business.planning.ordered_step_ids",
+        "business.status",
+        "execution.agents.planner",
+        "execution.trace"
+      ],
+      "forbidden_paths_untouched": [
+        "business.intent.accepted",
+        "business.knowledge",
+        "business.validation",
+        "business.output",
+        "business.hitl",
+        "business.generation.blueprint_final",
+        "execution.gates"
+      ]
+    }
+  },
+  {
+    "event_id": "f23add87-af4e-4044-b6a6-1180571dd968",
+    "at": "2026-08-12T10:34:28.999711Z",
+    "stage": "planning",
+    "actor": "code",
+    "component": "orchestrator.router",
+    "decision": "router_escalate",
+    "evidence_refs": [],
+    "detail": {
+      "action": "escalate",
+      "failure_class": "blocking_knowledge_gap",
+      "reason": "Blocking knowledge gaps require HITL: ['U_TECH-ADDR-UPDATE-APIS']",
+      "repair_pass": 0,
+      "max_repairs": 1,
+      "validation_passed": true,
+      "allow_continue": false,
+      "blocking_knowledge_gaps": [
+        "U_TECH-ADDR-UPDATE-APIS"
+      ],
+      "high_risk_assumption_ids": [
+        "A_TECH-ADDR-UPDATE-APIS"
+      ],
+      "structural_codes": [],
+      "repairable_codes": [],
+      "repair_attempted": false,
+      "official_journey_validation": false
+    }
+  }
+]

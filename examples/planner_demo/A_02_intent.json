@@ -1,0 +1,22 @@
+{
+  "user_intent": "UPDATE_ADDRESS",
+  "journey_type": "servicing",
+  "platform": "asknow",
+  "product_domain": "customer_profile",
+  "entities": [
+    {
+      "type": "customer_id",
+      "value": "CUST-88991",
+      "raw_span": null,
+      "confidence": 0.91
+    },
+    {
+      "type": "address_type",
+      "value": "residential",
+      "raw_span": "address",
+      "confidence": 0.8
+    }
+  ],
+  "confidence": 0.9,
+  "accepted_by": "intent_gate"
+}
