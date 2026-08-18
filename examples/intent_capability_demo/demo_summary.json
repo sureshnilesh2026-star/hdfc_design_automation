@@ -1,0 +1,44 @@
+[
+  {
+    "scenario": "credit_card_eva",
+    "utterance": "I want a credit card",
+    "channel_hint": "eva",
+    "gate_verdict": "accepted",
+    "accepted_intent": "APPLY_CREDIT_CARD",
+    "accepted_platform": "eva_dbu",
+    "capability_status": "fully_supported",
+    "capability_supported": true,
+    "confidence": 1.0,
+    "knowledge_sources": [
+      "3.1-eva-capabilities.md"
+    ]
+  },
+  {
+    "scenario": "credit_card_asknow",
+    "utterance": "I want a credit card",
+    "channel_hint": "asknow",
+    "gate_verdict": "accepted",
+    "accepted_intent": "APPLY_CREDIT_CARD",
+    "accepted_platform": "asknow",
+    "capability_status": "fully_supported",
+    "capability_supported": true,
+    "confidence": 1.0,
+    "knowledge_sources": [
+      "3.2-asknow-capabilities.md"
+    ]
+  },
+  {
+    "scenario": "address_change_eva",
+    "utterance": "I want to change my address",
+    "channel_hint": "eva",
+    "gate_verdict": "accepted",
+    "accepted_intent": "UPDATE_ADDRESS",
+    "accepted_platform": "eva_dbu",
+    "capability_status": "fully_supported",
+    "capability_supported": true,
+    "confidence": 1.0,
+    "knowledge_sources": [
+      "3.1-eva-capabilities.md"
+    ]
+  }
+]

@@ -28,6 +28,14 @@ class PlannerAgentSettings(BaseModel):
     llm: LLMSettings = Field(default_factory=LLMSettings)
 
 
+class IntentAgentSettings(BaseModel):
+    """Settings for IntentRecognitionAgent only."""
+
+    prompt_version: str = "intent-system-v1"
+    enforce_contract_validation: bool = True
+    llm: LLMSettings = Field(default_factory=LLMSettings)
+
+
 def _env(name: str, default: str | None = None) -> str | None:
     value = os.environ.get(name)
     if value is None or value == "":
@@ -43,6 +51,27 @@ def get_planner_settings() -> PlannerAgentSettings:
         prompt_version=_env("HDFC_PLANNER_PROMPT_VERSION", "planner-system-v1")
         or "planner-system-v1",
         enforce_contract_validation=_env("HDFC_PLANNER_ENFORCE_CONTRACT", "true")
+        != "false",
+        llm=LLMSettings(
+            provider=provider,
+            model=_env("HDFC_LLM_MODEL", "gpt-4o-mini") or "gpt-4o-mini",
+            api_key=_env("OPENAI_API_KEY") or _env("HDFC_LLM_API_KEY"),
+            base_url=_env("OPENAI_BASE_URL") or _env("HDFC_LLM_BASE_URL"),
+            timeout_seconds=float(_env("HDFC_LLM_TIMEOUT_SECONDS", "60") or "60"),
+            max_retries=int(_env("HDFC_LLM_MAX_RETRIES", "1") or "1"),
+            temperature=float(_env("HDFC_LLM_TEMPERATURE", "0") or "0"),
+        ),
+    )
+
+
+@lru_cache(maxsize=1)
+def get_intent_settings() -> IntentAgentSettings:
+    """Load intent-agent settings from environment (no .env file required)."""
+    provider = _env("HDFC_LLM_PROVIDER", "openai") or "openai"
+    return IntentAgentSettings(
+        prompt_version=_env("HDFC_INTENT_PROMPT_VERSION", "intent-system-v1")
+        or "intent-system-v1",
+        enforce_contract_validation=_env("HDFC_INTENT_ENFORCE_CONTRACT", "true")
         != "false",
         llm=LLMSettings(
             provider=provider,

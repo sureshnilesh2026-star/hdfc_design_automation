@@ -1,0 +1,33 @@
+{
+  "verdict": "accepted",
+  "gate_id": "intent_gate_deterministic_v1",
+  "evaluated_at": "2026-08-13T17:01:49.031452Z",
+  "accepted_intent": {
+    "user_intent": "UPDATE_ADDRESS",
+    "journey_type": "servicing",
+    "platform": "asknow",
+    "product_domain": "accounts",
+    "entities": [],
+    "confidence": 0.88,
+    "ambiguities": [],
+    "priority": "normal",
+    "accepted_by": "intent_gate",
+    "accepted_at": "2026-08-13T17:01:49.031452Z"
+  },
+  "reason_codes": [],
+  "reasons": [
+    "Intent UPDATE_ADDRESS accepted: registry member, no unresolved ambiguity, platform derived from channel, confidence 0.88 >= 0.70."
+  ],
+  "overrides": [
+    {
+      "field": "platform",
+      "reason": "platform_from_channel_hint",
+      "model_value": null,
+      "accepted_value": "asknow"
+    }
+  ],
+  "dropped_entity_types": [],
+  "unresolved_ambiguity_fields": [],
+  "confidence_floor_applied": 0.7,
+  "model_confidence": 0.88
+}

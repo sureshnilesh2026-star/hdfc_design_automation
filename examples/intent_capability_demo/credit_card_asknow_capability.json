@@ -1,0 +1,49 @@
+{
+  "platform": "asknow",
+  "status": "fully_supported",
+  "supported": true,
+  "requested_capabilities": [
+    "authentication",
+    "form_input",
+    "document_upload",
+    "api_action",
+    "otp_verification"
+  ],
+  "supported_capabilities": [
+    "authentication",
+    "form_input",
+    "document_upload",
+    "api_action",
+    "otp_verification"
+  ],
+  "unsupported_capabilities": [],
+  "capabilities_needing_investigation": [],
+  "conflicts": [],
+  "constraints": [
+    "Uploads must use the platform's supported attachment component.",
+    "Long-running journeys must resume after re-authentication if the session expires.",
+    "Long-running backend calls must be modeled as asynchronous with a status-tracking step.",
+    "Long forms should be split across multiple conversational steps."
+  ],
+  "knowledge_sources": [
+    "3.2-asknow-capabilities.md"
+  ],
+  "confidence": 1.0,
+  "reasoning": [
+    "Loaded knowledge for platform 'asknow' (AskNow) from 3.2-asknow-capabilities.md.",
+    "'authentication': supported (source: ['3.2-asknow-capabilities.md']).",
+    "'form_input': supported (source: ['3.2-asknow-capabilities.md']).",
+    "'document_upload': supported (source: ['3.2-asknow-capabilities.md']).",
+    "'api_action': supported (source: ['3.2-asknow-capabilities.md']).",
+    "'otp_verification': supported (source: ['3.2-asknow-capabilities.md']).",
+    "Overall status: fully_supported (confidence 1.0)."
+  ],
+  "knowledge_source_documents": [
+    {
+      "document_id": "PLT-ASK-CAP-001",
+      "source_file": "3.2-asknow-capabilities.md",
+      "authority_rank": 80,
+      "status": "approved"
+    }
+  ]
+}

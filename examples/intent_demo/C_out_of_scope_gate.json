@@ -1,0 +1,30 @@
+{
+  "verdict": "rejected",
+  "gate_id": "intent_gate_deterministic_v1",
+  "evaluated_at": "2026-08-13T17:01:49.035677Z",
+  "accepted_intent": null,
+  "reason_codes": [
+    "intent_unknown",
+    "unresolved_ambiguity",
+    "confidence_below_floor"
+  ],
+  "reasons": [
+    "Intent could not be identified from the utterance; human clarification required rather than a guess.",
+    "Unresolved ambiguity on: user_intent. The agent explicitly declined to guess; clarification is required before the journey is planned.",
+    "Model confidence 0.20 is below floor 0.70."
+  ],
+  "overrides": [
+    {
+      "field": "platform",
+      "reason": "platform_from_channel_hint",
+      "model_value": null,
+      "accepted_value": "asknow"
+    }
+  ],
+  "dropped_entity_types": [],
+  "unresolved_ambiguity_fields": [
+    "user_intent"
+  ],
+  "confidence_floor_applied": 0.7,
+  "model_confidence": 0.2
+}
