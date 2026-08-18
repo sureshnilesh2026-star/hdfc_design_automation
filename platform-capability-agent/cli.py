@@ -23,7 +23,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from agent import PlatformCapabilityAgent, CapabilityRequest  # noqa: E402
 
-DEFAULT_KNOWLEDGE_DIR = str(Path(__file__).resolve().parent / "knowledge")
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+_SHARED_KB = _REPO_ROOT / "Knowledge_Base" / "Level 3 - Platform Knowledge"
+_FIXTURE_KB = Path(__file__).resolve().parent / "knowledge"
+DEFAULT_KNOWLEDGE_DIR = str(_SHARED_KB if _SHARED_KB.is_dir() else _FIXTURE_KB)
 
 
 def main() -> None:

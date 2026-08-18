@@ -222,7 +222,15 @@ class PlatformCapabilityAgentTests(unittest.TestCase):
             platform="  eva  ",
             required_capabilities=["authentication"],
         ))
-        self.assertEqual(resp.platform, "EVA")
+        self.assertEqual(resp.platform, "eva_dbu")
+        self.assertTrue(resp.supported)
+
+    def test_eva_dbu_alias_matches_eva_knowledge(self):
+        resp = self.agent.evaluate(CapabilityRequest(
+            platform="eva_dbu",
+            required_capabilities=["authentication"],
+        ))
+        self.assertEqual(resp.platform, "eva_dbu")
         self.assertTrue(resp.supported)
 
     def test_empty_requirements_raises(self):
@@ -236,6 +244,21 @@ class PlatformCapabilityAgentTests(unittest.TestCase):
             required_capabilities=["document_upload"],
         ))
         json.dumps(resp.to_dict())  # should not raise
+
+    def test_shared_knowledge_base_companions_load(self):
+        """Production companions under Knowledge_Base/Level 3 must be loadable."""
+        repo_root = Path(__file__).resolve().parent.parent.parent
+        shared = repo_root / "Knowledge_Base" / "Level 3 - Platform Knowledge"
+        if not shared.is_dir():
+            self.skipTest("shared Knowledge_Base not present")
+        agent = PlatformCapabilityAgent(knowledge_dir=str(shared))
+        self.assertIn("eva_dbu", agent.knowledge_index)
+        self.assertIn("asknow", agent.knowledge_index)
+        # Narrative docs must not be ingested as capability sources.
+        for pk in agent.knowledge_index.values():
+            for sf in pk.source_files:
+                self.assertIn("capabilities", sf)
+                self.assertNotEqual(sf, "PLATFORM_IDS.md")
 
 
 if __name__ == "__main__":

@@ -58,6 +58,25 @@ def normalize_capability(raw: str) -> str:
     return _ALIASES.get(slug, slug)
 
 
+# Canonical IDs match hdfc_journey.contracts.enums.Platform where applicable.
+# Callers may pass EVA / eva / eva_dbu — all resolve to eva_dbu.
+_PLATFORM_ALIASES = {
+    "eva": "eva_dbu",
+    "eva_dbu": "eva_dbu",
+    "dbu": "eva_dbu",
+    "enterprise_virtual_assistant": "eva_dbu",
+    "asknow": "asknow",
+    "ask_now": "asknow",
+}
+
+
 def normalize_platform(raw: str) -> str:
-    """Normalize a platform name for case/whitespace-insensitive lookup."""
-    return re.sub(r"[\s\-]+", "_", raw.strip()).upper()
+    """Normalize a platform name to a canonical lowercase snake_case ID.
+
+    Applies known aliases so intent-stage IDs (``eva_dbu``) and legacy
+    uppercase labels (``EVA``) hit the same knowledge-index key.
+    """
+    slug = re.sub(r"[\s\-]+", "_", raw.strip().lower())
+    slug = re.sub(r"[^a-z0-9_]", "", slug)
+    slug = re.sub(r"_+", "_", slug).strip("_")
+    return _PLATFORM_ALIASES.get(slug, slug)

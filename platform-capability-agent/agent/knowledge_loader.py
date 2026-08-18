@@ -271,11 +271,25 @@ def _merge(a: PlatformKnowledge, b: PlatformKnowledge) -> PlatformKnowledge:
     return a
 
 
+def _capability_markdown_paths(directory: Path) -> List[Path]:
+    """Prefer machine-readable ``*capabilities*.md`` companions.
+
+    Shared ``Knowledge_Base/Level 3`` also contains large narrative docs and
+    ``PLATFORM_IDS.md``; those must not be parsed. If a directory has no
+    capability-named files (e.g. tempfile fixtures in unit tests), fall back to
+    every ``*.md`` file.
+    """
+    capability_paths = sorted(directory.glob("*capabilities*.md"))
+    if capability_paths:
+        return capability_paths
+    return sorted(directory.glob("*.md"))
+
+
 def load_knowledge_base(directory: str) -> Tuple[Dict[str, PlatformKnowledge], Dict[str, List[str]]]:
     """
-    Load and merge every .md file in `directory` into a {platform_id: PlatformKnowledge}
-    index, honoring the metadata contract's retrieval gate: only `status: approved`
-    documents are indexed.
+    Load and merge capability markdown files in `directory` into a
+    {platform_id: PlatformKnowledge} index, honoring the metadata contract's
+    retrieval gate: only `status: approved` documents are indexed.
 
     Returns (approved_index, excluded_non_approved) where `excluded_non_approved`
     maps platform_id -> ["document_id (status)", ...] for documents that exist on
@@ -285,9 +299,12 @@ def load_knowledge_base(directory: str) -> Tuple[Dict[str, PlatformKnowledge], D
     """
     index: Dict[str, PlatformKnowledge] = {}
     excluded: Dict[str, List[str]] = {}
-    for path in sorted(Path(directory).glob("*.md")):
+    root = Path(directory)
+    for path in _capability_markdown_paths(root):
         pk, doc_meta = _parse_single_file(path)
-        if doc_meta.status != "approved":
+        status = (doc_meta.status or "approved").strip().lower()
+        doc_meta.status = status
+        if status != "approved":
             excluded.setdefault(pk.platform_id, []).append(
                 f"{doc_meta.document_id} (status={doc_meta.status})"
             )

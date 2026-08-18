@@ -1,0 +1,46 @@
+{
+  "platform": "eva_dbu",
+  "status": "fully_supported",
+  "supported": true,
+  "requested_capabilities": [
+    "authentication",
+    "form_input",
+    "document_upload",
+    "api_action"
+  ],
+  "supported_capabilities": [
+    "authentication",
+    "form_input",
+    "document_upload",
+    "api_action"
+  ],
+  "unsupported_capabilities": [],
+  "capabilities_needing_investigation": [],
+  "conflicts": [],
+  "constraints": [
+    "Document upload must use the platform's supported attachment component. Direct file-system or camera-based capture is not available as an upload source.",
+    "Session expires after 10 minutes of inactivity; long-running journeys must be able to resume after re-authentication.",
+    "Backend API calls must complete within 15 seconds or must be modeled as asynchronous with a status-tracking step.",
+    "Forms are limited to 12 fields per card; longer forms must be split across multiple conversational steps."
+  ],
+  "knowledge_sources": [
+    "3.1-eva-capabilities.md"
+  ],
+  "confidence": 1.0,
+  "reasoning": [
+    "Loaded knowledge for platform 'eva_dbu' (Enterprise Virtual Assistant (EVA DBU)) from 3.1-eva-capabilities.md.",
+    "'authentication': supported (source: ['3.1-eva-capabilities.md']).",
+    "'form_input': supported (source: ['3.1-eva-capabilities.md']).",
+    "'document_upload': supported (source: ['3.1-eva-capabilities.md']).",
+    "'api_action': supported (source: ['3.1-eva-capabilities.md']).",
+    "Overall status: fully_supported (confidence 1.0)."
+  ],
+  "knowledge_source_documents": [
+    {
+      "document_id": "PLT-EVA-CAP-001",
+      "source_file": "3.1-eva-capabilities.md",
+      "authority_rank": 80,
+      "status": "approved"
+    }
+  ]
+}

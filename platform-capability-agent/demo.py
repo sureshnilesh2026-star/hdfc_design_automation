@@ -202,7 +202,13 @@ def main() -> None:
 
     use_color = sys.stdout.isatty() and not args.no_color
 
-    knowledge_dir = str(Path(__file__).resolve().parent / "knowledge")
+    repo_root = Path(__file__).resolve().parent.parent
+    shared_kb = repo_root / "Knowledge_Base" / "Level 3 - Platform Knowledge"
+    fixture_kb = Path(__file__).resolve().parent / "knowledge"
+    # Demo scenarios include IVR / LEGACY_PORTAL / NEW_PORTAL which live only in
+    # the private fixture KB; merge by preferring fixtures when present so the
+    # narrated walkthrough stays complete, while shared Level-3 companions cover EVA/AskNow.
+    knowledge_dir = str(fixture_kb if fixture_kb.is_dir() else shared_kb)
     agent = PlatformCapabilityAgent(knowledge_dir=knowledge_dir)
 
     print_intro(use_color, args.fast)

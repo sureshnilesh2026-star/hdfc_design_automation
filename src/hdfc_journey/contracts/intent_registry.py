@@ -51,7 +51,13 @@ DEFAULT_INTENT_DEFINITIONS: tuple[IntentDefinition, ...] = (
         product_domain="credit_cards",
         description="Customer wants to apply for a new credit card.",
         allowed_entity_types=("card_variant", "employment_type", "income_band", "city"),
-        keyword_hints=("apply", "new credit card", "get a credit card", "want a card"),
+        keyword_hints=(
+            "apply",
+            "new credit card",
+            "get a credit card",
+            "want a card",
+            "want a credit card",
+        ),
     ),
     IntentDefinition(
         intent_id="UPDATE_ADDRESS",
