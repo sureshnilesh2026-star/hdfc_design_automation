@@ -7,3 +7,25 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE/editor files
+.vscode/
+.idea/
+.DS_Store
+
+# OS files
+Thumbs.db
+
+# Project-specific generated files
+*.log
