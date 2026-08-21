@@ -27,5 +27,19 @@ env/
 # OS files
 Thumbs.db
 
+# Secrets — never commit API keys
+.env
+.env.local
+.env.*.local
+
 # Project-specific generated files
 *.log
+
+# AgentOps
+agentops_data/
+frontend/node_modules/
+frontend/dist/
+tests/_agentops_tmp/
+
+# Python
+.mypy_cache/

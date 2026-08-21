@@ -1,0 +1,308 @@
+/* HDFC Design System tokens — sourced from Knowledge_Base/Updated Design System.
+   Layer 01 primitives, 02 alias (light/dark), 03 semantics, 04 layout, 05 type.
+   Brand column: HDFC (Inter, primary blue). Never hardcode ad-hoc product colors. */
+
+:root {
+  /* 01 — primitives */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --identity-hdfc-blue: #014790;
+  --identity-hdfc-red: #ff2d16;
+
+  --blue-50: #f3f6fd;
+  --blue-100: #e1e9fe;
+  --blue-200: #9cb4f7;
+  --blue-300: #6d8ff8;
+  --blue-400: #3b5ce1;
+  --blue-500: #1c3fca;
+  --blue-600: #1f30ad;
+  --blue-700: #112266;
+  --blue-800: #162150;
+  --blue-900: #11162d;
+
+  --grey-50: #f5f5f5;
+  --grey-100: #ececec;
+  --grey-200: #d9d9d9;
+  --grey-300: #b3b3b3;
+  --grey-400: #757575;
+  --grey-500: #444444;
+  --grey-600: #383838;
+  --grey-700: #2c2c2c;
+  --grey-800: #1e1e1e;
+  --grey-900: #111111;
+
+  --slate-50: #f9faff;
+  --slate-100: #ededf1;
+  --slate-200: #bbbcc3;
+  --slate-300: #9ea0aa;
+  --slate-400: #7e838f;
+  --slate-500: #5c6172;
+  --slate-600: #3e4457;
+  --slate-700: #252b3d;
+  --slate-800: #1b2137;
+  --slate-900: #10182d;
+
+  --green-50: #effaf2;
+  --green-100: #dcf4ed;
+  --green-200: #ace5c9;
+  --green-400: #50c898;
+  --green-500: #00815a;
+  --green-600: #076246;
+  --green-700: #0e4636;
+  --green-800: #11362a;
+  --green-900: #10231d;
+
+  --orange-50: #fefaec;
+  --orange-100: #fff2d6;
+  --orange-200: #f7c599;
+  --orange-400: #de7313;
+  --orange-500: #b65805;
+  --orange-600: #804006;
+  --orange-700: #542d0b;
+  --orange-800: #38210b;
+  --orange-900: #2e1d10;
+
+  --red-50: #fdf1f4;
+  --red-100: #ffdde6;
+  --red-200: #f49bb3;
+  --red-400: #e44771;
+  --red-500: #d61c53;
+  --red-600: #a30f3b;
+  --red-700: #6c1831;
+  --red-800: #3c1620;
+  --red-900: #261218;
+
+  --info-50: #ebfcfe;
+  --info-100: #dbf9fe;
+  --info-200: #b7effe;
+  --info-400: #37baf6;
+  --info-500: #2a78c6;
+  --info-600: #2974c1;
+  --info-700: #2467ad;
+  --info-800: #153a65;
+  --info-900: #142b4d;
+
+  --violet-50: #f4f0ff;
+  --violet-400: #9077f4;
+  --violet-500: #7454f2;
+  --violet-800: #241950;
+  --violet-900: #1d1537;
+
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 28px;
+  --space-4xl: 32px;
+  --space-5xl: 40px;
+  --space-6xl: 48px;
+  --space-7xl: 64px;
+
+  --radius-2xs: 4px;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 999px;
+
+  --border-xs: 1px;
+  --border-md: 2px;
+
+  --font-family: Inter, "Segoe UI", sans-serif;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  --size-icon-sm: 16px;
+  --size-icon-md: 20px;
+  --size-icon-lg: 24px;
+  --size-touch: 44px;
+
+  --bp-tablet: 768px;
+  --bp-desktop: 1280px;
+  --bp-large: 1440px;
+
+  --layout-card-padding: 20px;
+  --layout-section-gap: 24px;
+  --layout-container-pad: 16px;
+  --sidebar-width: 272px;
+
+  /* 02/03 — Light theme (HDFC) */
+  --brand-logo: var(--identity-hdfc-blue);
+  --brand-accent: var(--identity-hdfc-red);
+
+  --page-subtle: var(--color-white);
+  --page-moderate: var(--grey-50);
+
+  --text-subtle: var(--grey-500);
+  --text-default: var(--grey-900);
+  --text-strong: var(--grey-700);
+  --text-inverse: var(--color-white);
+  --text-disabled: var(--grey-200);
+  --text-primary: var(--blue-500);
+  --text-success: var(--green-600);
+  --text-warning: var(--orange-500);
+  --text-danger: var(--red-500);
+  --text-info: var(--info-500);
+
+  --card-subtle: var(--color-white);
+  --card-moderate: var(--grey-50);
+  --card-primary-subtle: var(--blue-50);
+
+  --icon-subtle: var(--grey-500);
+  --icon-default: var(--grey-900);
+  --icon-strong: var(--grey-700);
+  --icon-primary: var(--blue-500);
+  --icon-success: var(--green-500);
+  --icon-warning: var(--orange-500);
+  --icon-danger: var(--red-500);
+  --icon-info: var(--info-500);
+
+  --border-default: var(--grey-200);
+  --border-strong: var(--grey-500);
+  --border-primary: var(--blue-500);
+  --border-primary-hover: var(--blue-400);
+
+  --feedback-primary-bg: var(--blue-50);
+  --feedback-success-bg: var(--green-50);
+  --feedback-warning-bg: var(--orange-50);
+  --feedback-error-bg: var(--red-50);
+  --feedback-info-bg: var(--info-50);
+  --feedback-neutral-bg: var(--grey-50);
+  --feedback-success-border: var(--green-200);
+  --feedback-warning-border: var(--orange-200);
+  --feedback-error-border: var(--red-200);
+  --feedback-info-border: var(--info-200);
+  --feedback-primary-border: var(--blue-200);
+
+  --elevation-subtle: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --elevation-moderate: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --elevation-intense: 0 8px 16px rgba(0, 0, 0, 0.12);
+  --elevation-bg: var(--color-white);
+
+  --btn-primary-bg: var(--blue-500);
+  --btn-primary-fg: var(--color-white);
+  --btn-primary-hover: var(--blue-400);
+  --btn-primary-pressed: var(--blue-600);
+  --btn-primary-disabled-bg: var(--blue-200);
+  --btn-primary-disabled-fg: var(--blue-50);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.48);
+  --btn-secondary-fg: var(--blue-500);
+  --btn-secondary-border: var(--blue-500);
+  --btn-secondary-hover: var(--blue-50);
+  --btn-radius: var(--radius-md);
+
+  --input-bg: var(--color-white);
+  --input-border: var(--grey-200);
+  --input-focus: var(--blue-500);
+  --input-placeholder: var(--grey-500);
+  --focus-ring: var(--blue-500);
+
+  --sidebar-bg: var(--slate-900);
+  --sidebar-fg: var(--slate-100);
+  --sidebar-muted: var(--slate-300);
+  --sidebar-active: var(--blue-400);
+  --sidebar-active-bg: rgba(59, 92, 225, 0.18);
+  --header-bg: var(--color-white);
+  --overlay: rgba(17, 17, 17, 0.48);
+
+  --status-healthy: var(--green-500);
+  --status-degraded: var(--orange-500);
+  --status-failed: var(--red-500);
+  --status-offline: var(--grey-400);
+  --status-dev: var(--violet-500);
+  --status-running: var(--blue-500);
+  --status-unknown: var(--slate-400);
+}
+
+[data-theme="dark"] {
+  --page-subtle: var(--grey-900);
+  --page-moderate: var(--grey-800);
+
+  --text-subtle: var(--grey-300);
+  --text-default: var(--grey-50);
+  --text-strong: var(--grey-200);
+  --text-inverse: var(--grey-900);
+  --text-disabled: var(--grey-700);
+  --text-primary: var(--blue-300);
+  --text-success: var(--green-400);
+  --text-warning: var(--orange-400);
+  --text-danger: var(--red-400);
+  --text-info: var(--info-400);
+
+  --card-subtle: var(--grey-800);
+  --card-moderate: var(--grey-700);
+  --card-primary-subtle: var(--blue-900);
+
+  --icon-subtle: var(--grey-300);
+  --icon-default: var(--grey-50);
+  --icon-strong: var(--grey-200);
+  --icon-primary: var(--blue-400);
+
+  --border-default: var(--grey-700);
+  --border-strong: var(--grey-300);
+  --border-primary: var(--blue-400);
+
+  --feedback-primary-bg: var(--blue-900);
+  --feedback-success-bg: var(--green-900);
+  --feedback-warning-bg: var(--orange-900);
+  --feedback-error-bg: var(--red-900);
+  --feedback-info-bg: var(--info-900);
+  --feedback-neutral-bg: var(--grey-800);
+  --feedback-success-border: var(--green-700);
+  --feedback-warning-border: var(--orange-700);
+  --feedback-error-border: var(--red-700);
+  --feedback-info-border: var(--info-700);
+  --feedback-primary-border: var(--blue-700);
+
+  --elevation-subtle: 0 1px 2px rgba(0, 0, 0, 0.64);
+  --elevation-moderate: 0 4px 8px rgba(0, 0, 0, 0.64);
+  --elevation-intense: 0 8px 16px rgba(0, 0, 0, 0.64);
+  --elevation-bg: var(--grey-700);
+
+  --btn-primary-bg: var(--blue-400);
+  --btn-primary-fg: var(--blue-900);
+  --btn-primary-hover: var(--blue-500);
+  --btn-primary-pressed: var(--blue-300);
+  --btn-primary-disabled-bg: var(--grey-700);
+  --btn-primary-disabled-fg: var(--grey-400);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.08);
+  --btn-secondary-fg: var(--blue-300);
+  --btn-secondary-border: var(--blue-400);
+  --btn-secondary-hover: var(--blue-900);
+
+  --input-bg: var(--grey-800);
+  --input-border: var(--grey-700);
+  --input-focus: var(--blue-400);
+  --input-placeholder: var(--grey-300);
+
+  --sidebar-bg: var(--slate-900);
+  --header-bg: var(--grey-800);
+  --overlay: rgba(0, 0, 0, 0.64);
+
+  --status-healthy: var(--green-400);
+  --status-degraded: var(--orange-400);
+  --status-failed: var(--red-400);
+  --status-running: var(--blue-300);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --layout-container-pad: 32px;
+    --layout-section-gap: 28px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --layout-container-pad: 56px;
+    --layout-section-gap: 32px;
+  }
+}

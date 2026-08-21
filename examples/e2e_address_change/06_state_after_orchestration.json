@@ -1,8 +1,8 @@
 {
   "state_id": "33333333-3333-3333-3333-333333333333",
   "schema_version": "1.0",
-  "created_at": "2026-08-12T10:34:28.996199Z",
-  "updated_at": "2026-08-12T10:34:28.999746Z",
+  "created_at": "2026-08-18T07:46:12.679929Z",
+  "updated_at": "2026-08-18T07:46:12.682814Z",
   "business": {
     "status": "escalated",
     "input": {
@@ -858,9 +858,9 @@
       "plan_schema_version": "1.0.0",
       "error": null,
       "contract_validation_report": {
-        "report_id": "c5f5ee46-5d7c-422a-8970-96be6c60e031",
+        "report_id": "9e306c29-8b32-4fd4-8b33-5e74e71de6a3",
         "validator_id": "planner_output_deterministic_v1",
-        "validated_at": "2026-08-12T10:34:28.998475Z",
+        "validated_at": "2026-08-18T07:46:12.681760Z",
         "official_journey_validation": false,
         "artifact_type_expected": "journey_plan",
         "overall_passed": true,
@@ -1598,9 +1598,9 @@
           "error": null
         },
         "original_validation": {
-          "report_id": "c5f5ee46-5d7c-422a-8970-96be6c60e031",
+          "report_id": "9e306c29-8b32-4fd4-8b33-5e74e71de6a3",
           "validator_id": "planner_output_deterministic_v1",
-          "validated_at": "2026-08-12T10:34:28.998475Z",
+          "validated_at": "2026-08-18T07:46:12.681760Z",
           "official_journey_validation": false,
           "artifact_type_expected": "journey_plan",
           "overall_passed": true,
@@ -1639,9 +1639,9 @@
         "repaired_output": null,
         "repaired_validation": null,
         "final_validation": {
-          "report_id": "c5f5ee46-5d7c-422a-8970-96be6c60e031",
+          "report_id": "9e306c29-8b32-4fd4-8b33-5e74e71de6a3",
           "validator_id": "planner_output_deterministic_v1",
-          "validated_at": "2026-08-12T10:34:28.998475Z",
+          "validated_at": "2026-08-18T07:46:12.681760Z",
           "official_journey_validation": false,
           "artifact_type_expected": "journey_plan",
           "overall_passed": true,
@@ -1752,8 +1752,8 @@
     "stage_history": [
       {
         "stage": "planning",
-        "entered_at": "2026-08-12T10:34:28.996913Z",
-        "exited_at": "2026-08-12T10:34:28.999711Z",
+        "entered_at": "2026-08-18T07:46:12.680595Z",
+        "exited_at": "2026-08-18T07:46:12.682785Z",
         "outcome": "escalated"
       }
     ],
@@ -1772,7 +1772,7 @@
       "planner": {
         "model": "deterministic-planner-v1",
         "prompt_version": "planner-system-v1",
-        "latency_ms": 1.5932999995129649,
+        "latency_ms": 1.2192000003778958,
         "token_usage": {
           "input": null,
           "output": null
@@ -1801,8 +1801,8 @@
     },
     "trace": [
       {
-        "event_id": "f5225efe-354f-4684-8412-3115a0c3f1ad",
-        "at": "2026-08-12T10:34:28.998751Z",
+        "event_id": "00551f98-2427-4382-9b4c-7b920f7be4f0",
+        "at": "2026-08-18T07:46:12.681956Z",
         "stage": "planning",
         "actor": "code",
         "component": "orchestrator.router",
@@ -1818,8 +1818,8 @@
         }
       },
       {
-        "event_id": "2e17ec0a-f4e6-4db7-808f-ac17cfe0bd10",
-        "at": "2026-08-12T10:34:28.999385Z",
+        "event_id": "9b4dd280-464f-4f27-bada-71bd5b8174aa",
+        "at": "2026-08-18T07:46:12.682490Z",
         "stage": "planning",
         "actor": "llm",
         "component": "journey_planner_agent",
@@ -1847,7 +1847,7 @@
           ],
           "model": "deterministic-planner-v1",
           "prompt_version": "planner-system-v1",
-          "latency_ms": 1.5932999995129649,
+          "latency_ms": 1.2192000003778958,
           "structured_output_ok": true,
           "error": null,
           "contract_validation_passed": true,
@@ -1856,8 +1856,8 @@
         }
       },
       {
-        "event_id": "2f3c5bdf-6c5c-4041-b83d-531203482858",
-        "at": "2026-08-12T10:34:28.999431Z",
+        "event_id": "45ce4c8c-a203-4625-b3a7-71789b966f29",
+        "at": "2026-08-18T07:46:12.682522Z",
         "stage": "planning",
         "actor": "code",
         "component": "orchestrator.planning_merge",
@@ -1891,8 +1891,8 @@
         }
       },
       {
-        "event_id": "f23add87-af4e-4044-b6a6-1180571dd968",
-        "at": "2026-08-12T10:34:28.999711Z",
+        "event_id": "e9fa2c58-c6a1-40d2-b9c8-d389450a8f59",
+        "at": "2026-08-18T07:46:12.682785Z",
         "stage": "planning",
         "actor": "code",
         "component": "orchestrator.router",
