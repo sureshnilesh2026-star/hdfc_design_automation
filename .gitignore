@@ -1,0 +1,45 @@
+.DS_Store
+__pycache__/
+*.pyc
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE/editor files
+.vscode/
+.idea/
+.DS_Store
+
+# OS files
+Thumbs.db
+
+# Secrets — never commit API keys
+.env
+.env.local
+.env.*.local
+
+# Project-specific generated files
+*.log
+
+# AgentOps
+agentops_data/
+frontend/node_modules/
+frontend/dist/
+tests/_agentops_tmp/
+
+# Python
+.mypy_cache/

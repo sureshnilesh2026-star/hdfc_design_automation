@@ -1,7 +1,7 @@
 [
   {
-    "event_id": "f5225efe-354f-4684-8412-3115a0c3f1ad",
-    "at": "2026-08-12T10:34:28.998751Z",
+    "event_id": "00551f98-2427-4382-9b4c-7b920f7be4f0",
+    "at": "2026-08-18T07:46:12.681956Z",
     "stage": "planning",
     "actor": "code",
     "component": "orchestrator.router",
@@ -17,8 +17,8 @@
     }
   },
   {
-    "event_id": "2e17ec0a-f4e6-4db7-808f-ac17cfe0bd10",
-    "at": "2026-08-12T10:34:28.999385Z",
+    "event_id": "9b4dd280-464f-4f27-bada-71bd5b8174aa",
+    "at": "2026-08-18T07:46:12.682490Z",
     "stage": "planning",
     "actor": "llm",
     "component": "journey_planner_agent",
@@ -46,7 +46,7 @@
       ],
       "model": "deterministic-planner-v1",
       "prompt_version": "planner-system-v1",
-      "latency_ms": 1.5932999995129649,
+      "latency_ms": 1.2192000003778958,
       "structured_output_ok": true,
       "error": null,
       "contract_validation_passed": true,
@@ -55,8 +55,8 @@
     }
   },
   {
-    "event_id": "2f3c5bdf-6c5c-4041-b83d-531203482858",
-    "at": "2026-08-12T10:34:28.999431Z",
+    "event_id": "45ce4c8c-a203-4625-b3a7-71789b966f29",
+    "at": "2026-08-18T07:46:12.682522Z",
     "stage": "planning",
     "actor": "code",
     "component": "orchestrator.planning_merge",
@@ -90,8 +90,8 @@
     }
   },
   {
-    "event_id": "f23add87-af4e-4044-b6a6-1180571dd968",
-    "at": "2026-08-12T10:34:28.999711Z",
+    "event_id": "e9fa2c58-c6a1-40d2-b9c8-d389450a8f59",
+    "at": "2026-08-18T07:46:12.682785Z",
     "stage": "planning",
     "actor": "code",
     "component": "orchestrator.router",

@@ -1,0 +1,281 @@
+{
+  "state_id": "398b452f-6350-4d6e-83c8-ded30c3b8412",
+  "schema_version": "1.0",
+  "created_at": "2026-08-13T17:01:49.030454Z",
+  "updated_at": "2026-08-13T17:01:49.031969Z",
+  "business": {
+    "status": "intent_resolved",
+    "input": {
+      "raw": {
+        "modality": "text",
+        "text": "I want to change my address",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "received_at": null
+      },
+      "normalized": {
+        "request_id": "856dd88b-fa0a-475d-b4d8-1cede6bd98fc",
+        "modality": "text",
+        "raw_text": "I want to change my address",
+        "channel_hint": "asknow",
+        "locale": "en-IN",
+        "customer_context": {},
+        "timestamp": null
+      }
+    },
+    "intent": {
+      "proposal": {
+        "user_intent": "UPDATE_ADDRESS",
+        "journey_type": "servicing",
+        "platform": null,
+        "product_domain": "accounts",
+        "entities": [],
+        "confidence": 0.88,
+        "ambiguities": [],
+        "priority_hint": "normal",
+        "rationale": "Utterance keywords matched registry intent UPDATE_ADDRESS; 0 entities extracted literally."
+      },
+      "accepted": {
+        "user_intent": "UPDATE_ADDRESS",
+        "journey_type": "servicing",
+        "platform": "asknow",
+        "product_domain": "accounts",
+        "entities": [],
+        "confidence": 0.88,
+        "ambiguities": [],
+        "priority": "normal",
+        "accepted_by": "intent_gate",
+        "accepted_at": "2026-08-13T17:01:49.031452Z"
+      }
+    },
+    "knowledge": null,
+    "planning": {
+      "skeleton_id": null,
+      "decisions": [],
+      "assumptions": [],
+      "unknown_requirements": [],
+      "entity_bindings": [],
+      "required_information": [],
+      "ordered_step_ids": [],
+      "skipped_optional_step_ids": [],
+      "selected_step_ids": [],
+      "knowledge_references": [],
+      "confidence": null,
+      "planner_status": null,
+      "plan_artifact_type": null,
+      "plan_schema_version": null,
+      "error": null,
+      "contract_validation_report": null,
+      "repair_audit": null,
+      "router_decision": null
+    },
+    "generation": {
+      "blueprint_draft": null,
+      "blueprint_normalized": null,
+      "blueprint_final": null
+    },
+    "validation": {
+      "result": "pending",
+      "report": {},
+      "attempt": 0,
+      "validated_at": null,
+      "validator_id": null
+    },
+    "hitl": {
+      "required": false,
+      "reasons": [],
+      "pending_questions": [],
+      "ticket": null
+    },
+    "errors": [],
+    "output": {
+      "kind": "none",
+      "blueprint_id": null,
+      "escalation_id": null,
+      "completed_at": null
+    }
+  },
+  "execution": {
+    "run_id": "8606847b-74d9-4330-baec-dbfe213807ea",
+    "orchestrator_version": "0.1.0",
+    "current_stage": "intent",
+    "stage_history": [
+      {
+        "stage": "intent",
+        "entered_at": "2026-08-13T17:01:49.030610Z",
+        "exited_at": "2026-08-13T17:01:49.031942Z",
+        "outcome": "success"
+      }
+    ],
+    "agents": {
+      "intent": {
+        "model": null,
+        "prompt_version": "intent-system-v1",
+        "latency_ms": 0.7374789998948472,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": true,
+        "repair_pass": 0
+      },
+      "planner": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      }
+    },
+    "tools_invoked": [],
+    "gates": {
+      "intent_gate": "passed",
+      "knowledge_gate": "not_run",
+      "validation_gate": "not_run"
+    },
+    "config_snapshot": {
+      "intent_allowlist": [
+        "APPLY_CREDIT_CARD",
+        "UPDATE_ADDRESS",
+        "BLOCK_CARD",
+        "CHECK_BALANCE"
+      ],
+      "platform_allowlist": [
+        "asknow",
+        "eva_dbu",
+        "web",
+        "mobile_native"
+      ],
+      "confidence_floor": 0.7,
+      "max_planner_repairs": 1,
+      "planner_prompt_version": "planner-system-v1",
+      "llm_model": null
+    },
+    "trace": [
+      {
+        "event_id": "59f83d62-51d0-4802-ab35-fa9740708a21",
+        "at": "2026-08-13T17:01:49.031567Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "route_eval_continue",
+        "evidence_refs": [],
+        "detail": {
+          "action": "continue",
+          "failure_class": "none",
+          "reason": "Intent accepted by deterministic gate; proceed to knowledge retrieval.",
+          "repair_pass": 0,
+          "max_clarifications": 1,
+          "gate_accepted": true
+        }
+      },
+      {
+        "event_id": "2c2c6807-e7a2-4a6c-ae6e-03dff9f22a18",
+        "at": "2026-08-13T17:01:49.031803Z",
+        "stage": "intent",
+        "actor": "llm",
+        "component": "intent_recognition_agent",
+        "decision": "intent_proposal_emitted",
+        "evidence_refs": [],
+        "detail": {
+          "intent_status": "proposed",
+          "proposal_ok": true,
+          "user_intent": "UPDATE_ADDRESS",
+          "confidence": 0.88,
+          "ambiguity_fields": [],
+          "entity_types": [],
+          "model": null,
+          "prompt_version": "intent-system-v1",
+          "latency_ms": 0.7374789998948472,
+          "structured_output_ok": true,
+          "error": null,
+          "contract_validation_passed": true,
+          "grants_acceptance": false,
+          "repair_pass": 0
+        }
+      },
+      {
+        "event_id": "f278ec3a-e947-43f8-ba6f-809de9614e88",
+        "at": "2026-08-13T17:01:49.031838Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_merge",
+        "decision": "merged_intent_proposal_into_business_intent",
+        "evidence_refs": [],
+        "detail": {
+          "written_paths": [
+            "business.intent.proposal",
+            "execution.agents.intent",
+            "execution.trace"
+          ],
+          "forbidden_paths_untouched": [
+            "business.intent.accepted",
+            "business.input",
+            "business.knowledge",
+            "business.planning",
+            "business.validation",
+            "business.hitl",
+            "business.output",
+            "execution.gates"
+          ]
+        }
+      },
+      {
+        "event_id": "93a99a31-5c2c-4f1a-8a5b-5cc98bb3f317",
+        "at": "2026-08-13T17:01:49.031915Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_gate",
+        "decision": "intent_accepted",
+        "evidence_refs": [],
+        "detail": {
+          "verdict": "accepted",
+          "gate_id": "intent_gate_deterministic_v1",
+          "reason_codes": [],
+          "reasons": [
+            "Intent UPDATE_ADDRESS accepted: registry member, no unresolved ambiguity, platform derived from channel, confidence 0.88 >= 0.70."
+          ],
+          "overrides": [
+            {
+              "field": "platform",
+              "reason": "platform_from_channel_hint",
+              "model_value": null,
+              "accepted_value": "asknow"
+            }
+          ],
+          "dropped_entity_types": [],
+          "unresolved_ambiguity_fields": [],
+          "model_confidence": 0.88,
+          "confidence_floor_applied": 0.7
+        }
+      },
+      {
+        "event_id": "c861393d-066c-4e35-9c67-66ed782c2ac7",
+        "at": "2026-08-13T17:01:49.031942Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "router_continue",
+        "evidence_refs": [],
+        "detail": {
+          "action": "continue",
+          "failure_class": "none",
+          "reason": "Intent accepted by deterministic gate; proceed to knowledge retrieval.",
+          "repair_pass": 0,
+          "max_clarifications": 1,
+          "gate_accepted": true,
+          "validation_passed": true,
+          "allow_continue": true,
+          "reason_codes": [],
+          "structural_codes": [],
+          "clarifiable_codes": [],
+          "clarify_attempted": false
+        }
+      }
+    ]
+  }
+}

@@ -1,8 +1,17 @@
 pydantic<3,>=2.6
 
+[agentops]
+fastapi<1,>=0.115
+uvicorn[standard]<1,>=0.32
+python-multipart>=0.0.9
+
 [dev]
 pytest>=8.0
 openai<2,>=1.40
+fastapi<1,>=0.115
+uvicorn[standard]<1,>=0.32
+python-multipart>=0.0.9
+httpx<1,>=0.27
 
 [llm]
 openai<2,>=1.40

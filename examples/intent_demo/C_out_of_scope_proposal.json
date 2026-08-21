@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "intent_proposal",
+  "intent_status": "unknown",
+  "proposal_ok": true,
+  "user_intent": "UNKNOWN",
+  "journey_type": null,
+  "product_domain": null,
+  "platform_hint": null,
+  "entities": [],
+  "confidence": 0.2,
+  "ambiguities": [
+    {
+      "field": "user_intent",
+      "candidates": [],
+      "note": "No registry intent keyword matched the utterance."
+    }
+  ],
+  "priority_hint": null,
+  "rationale": "No registry intent keyword matched the utterance.",
+  "error": null
+}

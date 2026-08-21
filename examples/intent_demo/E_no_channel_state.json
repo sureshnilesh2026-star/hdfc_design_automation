@@ -1,0 +1,283 @@
+{
+  "state_id": "714b29cd-855d-4ba1-bfb7-b6280be662f2",
+  "schema_version": "1.0",
+  "created_at": "2026-08-13T17:01:49.038359Z",
+  "updated_at": "2026-08-13T17:01:49.039029Z",
+  "business": {
+    "status": "escalated",
+    "input": {
+      "raw": {
+        "modality": "text",
+        "text": "I want to change my address",
+        "channel_hint": null,
+        "locale": "en-IN",
+        "received_at": null
+      },
+      "normalized": {
+        "request_id": "991c578d-6495-46df-a942-46af03a7f48a",
+        "modality": "text",
+        "raw_text": "I want to change my address",
+        "channel_hint": null,
+        "locale": "en-IN",
+        "customer_context": {},
+        "timestamp": null
+      }
+    },
+    "intent": {
+      "proposal": {
+        "user_intent": "UPDATE_ADDRESS",
+        "journey_type": "servicing",
+        "platform": null,
+        "product_domain": "accounts",
+        "entities": [],
+        "confidence": 0.88,
+        "ambiguities": [],
+        "priority_hint": "normal",
+        "rationale": "Utterance keywords matched registry intent UPDATE_ADDRESS; 0 entities extracted literally."
+      },
+      "accepted": null
+    },
+    "knowledge": null,
+    "planning": {
+      "skeleton_id": null,
+      "decisions": [],
+      "assumptions": [],
+      "unknown_requirements": [],
+      "entity_bindings": [],
+      "required_information": [],
+      "ordered_step_ids": [],
+      "skipped_optional_step_ids": [],
+      "selected_step_ids": [],
+      "knowledge_references": [],
+      "confidence": null,
+      "planner_status": null,
+      "plan_artifact_type": null,
+      "plan_schema_version": null,
+      "error": null,
+      "contract_validation_report": null,
+      "repair_audit": null,
+      "router_decision": null
+    },
+    "generation": {
+      "blueprint_draft": null,
+      "blueprint_normalized": null,
+      "blueprint_final": null
+    },
+    "validation": {
+      "result": "pending",
+      "report": {},
+      "attempt": 0,
+      "validated_at": null,
+      "validator_id": null
+    },
+    "hitl": {
+      "required": true,
+      "reasons": [
+        "Structural intent failure ['platform_underivable']; workflow must not continue.",
+        "failure_class=platform_underivable",
+        "Platform is not derivable from channel_hint None; the model's platform_hint is not authoritative and will not be substituted.",
+        "structural_codes=platform_underivable"
+      ],
+      "pending_questions": [],
+      "ticket": null
+    },
+    "errors": [
+      {
+        "code": "intent_structural_failure",
+        "message": "Structural intent failure ['platform_underivable']; workflow must not continue.",
+        "stage": "intent",
+        "source": "orchestrator.intent_router",
+        "retriable": false,
+        "at": "2026-08-13T17:01:49.039015Z"
+      }
+    ],
+    "output": {
+      "kind": "escalation",
+      "blueprint_id": null,
+      "escalation_id": null,
+      "completed_at": null
+    }
+  },
+  "execution": {
+    "run_id": "464a107e-f214-44d6-bfb4-1b18459bcac8",
+    "orchestrator_version": "0.1.0",
+    "current_stage": "intent",
+    "stage_history": [
+      {
+        "stage": "intent",
+        "entered_at": "2026-08-13T17:01:49.038548Z",
+        "exited_at": "2026-08-13T17:01:49.039018Z",
+        "outcome": "escalated"
+      }
+    ],
+    "agents": {
+      "intent": {
+        "model": null,
+        "prompt_version": "intent-system-v1",
+        "latency_ms": 0.23518199998306955,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": true,
+        "repair_pass": 0
+      },
+      "planner": {
+        "model": null,
+        "prompt_version": null,
+        "latency_ms": null,
+        "token_usage": {
+          "input": null,
+          "output": null
+        },
+        "structured_output_ok": null,
+        "repair_pass": 0
+      }
+    },
+    "tools_invoked": [],
+    "gates": {
+      "intent_gate": "failed",
+      "knowledge_gate": "not_run",
+      "validation_gate": "not_run"
+    },
+    "config_snapshot": {
+      "intent_allowlist": [
+        "APPLY_CREDIT_CARD",
+        "UPDATE_ADDRESS",
+        "BLOCK_CARD",
+        "CHECK_BALANCE"
+      ],
+      "platform_allowlist": [
+        "asknow",
+        "eva_dbu",
+        "web",
+        "mobile_native"
+      ],
+      "confidence_floor": 0.7,
+      "max_planner_repairs": 1,
+      "planner_prompt_version": "planner-system-v1",
+      "llm_model": null
+    },
+    "trace": [
+      {
+        "event_id": "fdade609-a519-4071-958e-b4026f139314",
+        "at": "2026-08-13T17:01:49.038868Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "route_eval_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "platform_underivable",
+          "reason": "Structural intent failure ['platform_underivable']; workflow must not continue.",
+          "repair_pass": 0,
+          "max_clarifications": 1,
+          "gate_accepted": false
+        }
+      },
+      {
+        "event_id": "8513a8f5-599d-4c7b-be10-1c3275fad7ed",
+        "at": "2026-08-13T17:01:49.038958Z",
+        "stage": "intent",
+        "actor": "llm",
+        "component": "intent_recognition_agent",
+        "decision": "intent_proposal_emitted",
+        "evidence_refs": [],
+        "detail": {
+          "intent_status": "proposed",
+          "proposal_ok": true,
+          "user_intent": "UPDATE_ADDRESS",
+          "confidence": 0.88,
+          "ambiguity_fields": [],
+          "entity_types": [],
+          "model": null,
+          "prompt_version": "intent-system-v1",
+          "latency_ms": 0.23518199998306955,
+          "structured_output_ok": true,
+          "error": null,
+          "contract_validation_passed": true,
+          "grants_acceptance": false,
+          "repair_pass": 0
+        }
+      },
+      {
+        "event_id": "fc199cc6-c4d6-43d8-9764-ac4723b5f055",
+        "at": "2026-08-13T17:01:49.038974Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_merge",
+        "decision": "merged_intent_proposal_into_business_intent",
+        "evidence_refs": [],
+        "detail": {
+          "written_paths": [
+            "business.intent.proposal",
+            "execution.agents.intent",
+            "execution.trace"
+          ],
+          "forbidden_paths_untouched": [
+            "business.intent.accepted",
+            "business.input",
+            "business.knowledge",
+            "business.planning",
+            "business.validation",
+            "business.hitl",
+            "business.output",
+            "execution.gates"
+          ]
+        }
+      },
+      {
+        "event_id": "263c136b-fbbf-44a0-8298-3d607a0da167",
+        "at": "2026-08-13T17:01:49.039000Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_gate",
+        "decision": "intent_rejected",
+        "evidence_refs": [],
+        "detail": {
+          "verdict": "rejected",
+          "gate_id": "intent_gate_deterministic_v1",
+          "reason_codes": [
+            "platform_underivable"
+          ],
+          "reasons": [
+            "Platform is not derivable from channel_hint None; the model's platform_hint is not authoritative and will not be substituted."
+          ],
+          "overrides": [],
+          "dropped_entity_types": [],
+          "unresolved_ambiguity_fields": [],
+          "model_confidence": 0.88,
+          "confidence_floor_applied": 0.7
+        }
+      },
+      {
+        "event_id": "b7dc1faf-a52b-46a6-ba7c-f011c36ab348",
+        "at": "2026-08-13T17:01:49.039018Z",
+        "stage": "intent",
+        "actor": "code",
+        "component": "orchestrator.intent_router",
+        "decision": "router_escalate",
+        "evidence_refs": [],
+        "detail": {
+          "action": "escalate",
+          "failure_class": "platform_underivable",
+          "reason": "Structural intent failure ['platform_underivable']; workflow must not continue.",
+          "repair_pass": 0,
+          "max_clarifications": 1,
+          "gate_accepted": false,
+          "validation_passed": true,
+          "allow_continue": false,
+          "reason_codes": [
+            "platform_underivable"
+          ],
+          "structural_codes": [
+            "platform_underivable"
+          ],
+          "clarifiable_codes": [],
+          "clarify_attempted": false
+        }
+      }
+    ]
+  }
+}

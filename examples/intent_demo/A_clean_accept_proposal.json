@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "intent_proposal",
+  "intent_status": "proposed",
+  "proposal_ok": true,
+  "user_intent": "UPDATE_ADDRESS",
+  "journey_type": "servicing",
+  "product_domain": "accounts",
+  "platform_hint": null,
+  "entities": [],
+  "confidence": 0.88,
+  "ambiguities": [],
+  "priority_hint": "normal",
+  "rationale": "Utterance keywords matched registry intent UPDATE_ADDRESS; 0 entities extracted literally.",
+  "error": null
+}
